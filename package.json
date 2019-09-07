@@ -1,7 +1,7 @@
 {
   "name": "texterify",
-  "version": "1.0.2",
-  "description": "A command line interface for the texterify service.",
+  "version": "0.0.1",
+  "description": "A CLI for Texterify.",
   "bin": {
     "texterify": "./out/index.js"
   },
