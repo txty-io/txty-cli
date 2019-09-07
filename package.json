@@ -1,0 +1,36 @@
+{
+  "name": "texterify",
+  "version": "1.0.2",
+  "description": "A command line interface for the texterify service.",
+  "bin": {
+    "texterify": "./out/index.js"
+  },
+  "scripts": {
+    "start": "yarn build && node out/index.js",
+    "build": "./node_modules/.bin/tsc",
+    "watch": "./node_modules/.bin/tsc -w -p ."
+  },
+  "author": "Christoph Werner",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.43",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6"
+  },
+  "dependencies": {
+    "@types/adm-zip": "^0.4.31",
+    "@types/lodash": "^4.14.109",
+    "@types/nconf": "^0.0.37",
+    "@types/node-fetch": "^2.1.2",
+    "@types/query-string": "^6.1.0",
+    "adm-zip": "^0.4.11",
+    "commander": "^2.18.0",
+    "lodash": "^4.17.10",
+    "nconf": "^0.10.0",
+    "node-fetch": "^2.2.0",
+    "query-string": "^6.1.0",
+    "tslint-microsoft-contrib": "^5.0.3"
+  }
+}
