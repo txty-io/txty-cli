@@ -1,6 +1,6 @@
 {
   "name": "texterify",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A CLI for Texterify.",
   "bin": {
     "texterify": "./out/index.js"
@@ -9,7 +9,7 @@
     "start": "yarn build && node out/index.js",
     "build": "./node_modules/.bin/tsc",
     "watch": "./node_modules/.bin/tsc -w -p .",
-    "publish": "yarn build && npm publish"
+    "deploy": "yarn build && yarn publish"
   },
   "author": "Christoph Werner",
   "license": "MIT",
