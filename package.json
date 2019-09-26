@@ -9,7 +9,7 @@
     "start": "yarn build && node out/index.js",
     "build": "./node_modules/.bin/tsc",
     "watch": "./node_modules/.bin/tsc -w -p .",
-    "publish": "npm publish"
+    "publish": "yarn build && npm publish"
   },
   "author": "Christoph Werner",
   "license": "MIT",
