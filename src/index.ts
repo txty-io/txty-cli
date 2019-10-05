@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
 import program from "commander";
+import packageJson from "../package.json";
 import { add } from "./commands/add";
 import { download } from "./commands/download";
 import { handleProgramOptions } from "./Config";
 import { Settings } from "./Settings";
 
-program.version("0.1");
+program.version(packageJson.version);
 program.option("--project-path <path>", "the path of the project folder");
 
 program
