@@ -33,9 +33,12 @@ const ProjectsAPI = {
   },
 
   export: (projectId: string) => {
-    return API.getRequest(`projects/${projectId}/export`, {
-      export_type: Settings.getExportType()
-    }, null, true);
+    return API.getRequest(
+      `projects/${projectId}/exports/${Settings.getExportConfigID()}`,
+      null,
+      null,
+      true
+    );
   },
 
   import: async (projectId: string, languageId: string, file: any) => {

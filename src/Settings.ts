@@ -12,8 +12,8 @@ const Settings = {
         return path.join(projectPath ? projectPath : "", projectConfig.getKey("export_directory"));
     },
 
-    getExportType: () => {
-        return projectConfig.getKey("export_type");
+    getExportConfigID: () => {
+        return projectConfig.getKey("export_configuration_id");
     },
 
     getAPIBaseURL: () => {
