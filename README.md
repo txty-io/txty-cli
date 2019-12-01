@@ -32,14 +32,14 @@ Example `.texterify.json`
 ```json
 {
     "auth_email": "email@example.com",
-    "auth_token": "aG2DzuoWG30a3IHwOKMQUg"
+    "auth_secret": "aG2DzuoWG30a3IHwOKMQUg"
 }
 ```
 
 | Option | Description | Optional |
 | --- | --- | --- |
 | auth_email | The email you use to log in on Texterify. | No |
-| auth_token | An access token you can generate at https://texterify.com/dashboard/settings/access-tokens. | No |
+| auth_secret | An access token you can generate at https://texterify.com/dashboard/settings/access-tokens. | No |
 
 ### Project Config
 
