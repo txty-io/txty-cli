@@ -26,9 +26,9 @@ The `texterify` utility can be configured by placing a `.texterify.json` in your
 
 ### Global Config
 
-The authentication against the Texterify server is configured in the global `.texterify.json` configuration file. Make sure to always keep the global config file private.
+The authentication against the Texterify server is configured in the global `~/.texterify.json` configuration file. Make sure to always keep the global config file private.
 
-Example `.texterify.json`
+Example `~/.texterify.json`
 ```json
 {
     "auth_email": "email@example.com",
