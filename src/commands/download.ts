@@ -2,7 +2,7 @@ import AdmZip from "adm-zip";
 import fs from "fs";
 import * as path from "path";
 import { ProjectsAPI } from "../api/ProjectsAPI";
-import { Settings } from "../Settings";
+import { Settings } from "../settings";
 
 async function download(projectId: string) {
     const response = await ProjectsAPI.export(projectId);

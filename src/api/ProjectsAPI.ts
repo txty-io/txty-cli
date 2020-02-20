@@ -1,4 +1,4 @@
-import { Settings } from "../Settings";
+import { Settings } from "../settings";
 import { API } from "./API";
 
 function getBase64(file: any) {

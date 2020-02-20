@@ -1,5 +1,5 @@
 import * as path from "path";
-import { projectConfig } from "./Config";
+import { projectConfig } from "./config";
 
 const Settings = {
     getProjectID: () => {

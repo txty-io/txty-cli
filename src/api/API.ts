@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import * as queryString from "query-string";
-import { globalConfig, projectConfig } from "../Config";
-import { Settings } from "../Settings";
+import { globalConfig, projectConfig } from "../config";
+import { Settings } from "../settings";
 
 const LOGGING_PREFIX: string = "[API]";
 
