@@ -6,7 +6,7 @@ import { download } from "./commands/download";
 import { handleProgramOptions } from "./config";
 import { Settings } from "./settings";
 
-program.version("0.0.5");
+program.version("0.0.6");
 program.option("--project-path <path>", "the path of the project folder");
 
 program
