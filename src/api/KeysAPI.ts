@@ -1,11 +1,11 @@
 import { API } from "./API";
 
 const KeysAPI = {
-    getKeys: async (projectId: string): Promise<any> => {
+    getKeys: async (projectId: string) => {
         return API.getRequest(`projects/${projectId}/keys`);
     },
 
-    createKey: async (projectId: string, name: string, description: string): Promise<any> => {
+    createKey: async (projectId: string, name: string, description: string) => {
         return API.postRequest(`projects/${projectId}/keys`, {
             name: name,
             description: description

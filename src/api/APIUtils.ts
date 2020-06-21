@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 
 const APIUtils = {
-  getIncludedObject(object: any, included: any): any {
+  getIncludedObject(object: any, included: any) {
     if (!object) {
       return null;
     }
