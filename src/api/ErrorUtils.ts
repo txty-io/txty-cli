@@ -1,3 +1,5 @@
+import { Logger } from "../Logger";
+
 export const ERROR_MESSAGES = {
     invalid: "{name} is invalid.",
     taken: "{name} is already in use.",
@@ -30,13 +32,23 @@ export const ErrorUtils = {
         });
     },
 
-    showErrors(errors: IErrorsResponse) {
+    getErrors(errors: IErrorsResponse) {
         const keys = Object.keys(errors);
+        const errorMessages: string[] = [];
 
         keys.forEach((key) => {
             errors[key].forEach((error) => {
-                console.error(this.getErrorMessage(key, error.error));
+                errorMessages.push(this.getErrorMessage(key, error.error));
             });
+        });
+
+        return errorMessages;
+    },
+
+    getAndPrintErrors(errors: IErrorsResponse) {
+        const errorMessages = ErrorUtils.getErrors(errors);
+        errorMessages.forEach((error) => {
+            Logger.error(error);
         });
     },
 

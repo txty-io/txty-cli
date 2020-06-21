@@ -1,8 +1,10 @@
 import fetch from "node-fetch";
 import * as queryString from "query-string";
 import { globalConfig } from "../Config";
+import { Logger } from "../Logger";
 import { Settings } from "../Settings";
-import { CLIError } from "@oclif/errors";
+import { Validators } from "../Validators";
+import { showErrorFixSuggestions } from "../Suggestions";
 
 const DEFAULT_HEADERS = {
     Accept: "application/json",
@@ -17,26 +19,20 @@ async function request(url: string, method: string, headers: any, params: any, i
         const requestHeaders = { ...DEFAULT_HEADERS, ...headers };
 
         const apiBaseUrl = Settings.getAPIBaseURL();
-        if (!apiBaseUrl) {
-            throw new CLIError("Please specify the API base url in your local .texterify.json config (api_base_url)");
-        }
+        Validators.ensureAPIBaseUrl(apiBaseUrl);
 
         const apiVersion = Settings.getAPIVersion();
-        if (!apiVersion) {
-            throw new CLIError("Please specify the API version in your local .texterify.json config (api_version)");
-        }
+        Validators.ensureAPIVersion(apiVersion);
 
         let fullURL = `${apiBaseUrl}/${apiVersion}/${url}`;
 
-        params.email = globalConfig.getKey("auth_email");
-        if (!params.email) {
-            throw new CLIError("Please specify the auth email in ~/.texterify.json (auth_email)");
-        }
+        const authEmail = globalConfig.getKey("auth_email");
+        params.email = authEmail;
+        Validators.ensureAuthEmail(authEmail);
 
-        params.api_secret = globalConfig.getKey("auth_secret");
-        if (!params.email) {
-            throw new CLIError("Please specify the auth secret ~/.texterify.json (auth_secret)");
-        }
+        const authSecret = globalConfig.getKey("auth_secret");
+        params.api_secret = authSecret;
+        Validators.ensureAuthSecret(authSecret);
 
         // Add query params if it is a get request.
         if (method === "GET" && params) {
@@ -55,14 +51,17 @@ async function request(url: string, method: string, headers: any, params: any, i
         let response;
         try {
             response = await fetch(fullURL, options);
+            if (response.status !== 200 && response.status !== 400) {
+                throw new Error(`Invalid response status received: ${response.status}`);
+            }
         } catch (error) {
-            console.error("Error while fetching:", error);
+            Logger.error("Error while fetching.");
             throw error;
         }
 
         return response && !isFileDownload ? response.json() : response;
     } catch (error) {
-        console.error(error);
+        Logger.error(error);
         throw error;
     }
 }

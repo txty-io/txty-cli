@@ -1,7 +1,10 @@
 import { Command, flags } from "@oclif/command";
-import { Settings } from "../Settings";
-import { KeysAPI } from "../api/KeysAPI";
 import { ErrorUtils } from "../api/ErrorUtils";
+import { KeysAPI } from "../api/KeysAPI";
+import { Logger } from "../Logger";
+import { Settings } from "../Settings";
+import { Validators } from "../Validators";
+import { showErrorFixSuggestions } from "../Suggestions";
 
 export default class Add extends Command {
     static description = "add a new key";
@@ -18,23 +21,22 @@ export default class Add extends Command {
         const { args } = this.parse(Add);
 
         const projectId = Settings.getProjectID();
-        if (!projectId) {
-            this.error("No project ID set.");
-        }
+        Validators.ensureProjectId(projectId);
 
         let response;
         try {
             response = await KeysAPI.createKey(projectId, args.name, args.description || "");
-
-            if (response?.errors) {
-                console.error(ErrorUtils.showErrors(response.errors));
-                this.exit(1);
-            }
-
-            this.log(`Key "${args.name}" successfully added.`);
         } catch (error) {
-            console.error(error);
-            this.error("Failed to add key.");
+            Logger.error("Failed to add key.");
+            showErrorFixSuggestions(error);
+            Validators.exitWithError();
+        }
+
+        if (response?.errors) {
+            ErrorUtils.getAndPrintErrors(response.errors);
+            Validators.exitWithError();
+        } else {
+            Logger.success(`Successfully added key "${args.name}".`);
         }
     }
 }
