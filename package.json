@@ -64,7 +64,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "oclif": {
-    "commands": "./lib/commands/src",
+    "commands": "./lib/commands",
     "bin": "texterify",
     "plugins": [
       "@oclif/plugin-help"
