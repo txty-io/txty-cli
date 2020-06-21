@@ -8,6 +8,8 @@ import { Logger } from "../Logger";
 import { Settings } from "../Settings";
 import { Validators } from "../Validators";
 import { showErrorFixSuggestions } from "../Suggestions";
+import { projectConfig } from "../Config";
+import * as nconf from "nconf";
 
 export default class Download extends Command {
     static description = "download the translations";
@@ -22,7 +24,15 @@ export default class Download extends Command {
     static examples = ["$ texterify download"];
 
     async run() {
-        this.parse(Download);
+        const { flags } = this.parse(Download);
+
+        if (flags["project-path"]) {
+            const configFilePath = path.join(flags["project-path"], "texterify.json");
+            const newProjectStore = new nconf.Provider();
+            newProjectStore.file({ file: configFilePath });
+            projectConfig.setStore(newProjectStore);
+            projectConfig.setKey("project_path", flags["project-path"]);
+        }
 
         const projectId = Settings.getProjectID();
         Validators.ensureProjectId(projectId);

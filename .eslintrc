@@ -51,7 +51,7 @@
         "no-fallthrough": "error",
         "no-new-wrappers": "error",
         "no-restricted-imports": ["error", "rxjs/Rx"],
-        "no-shadow": "error",
+        "no-shadow": "off",
         "no-throw-literal": "error",
         "no-undef-init": "error",
         "no-underscore-dangle": "error",

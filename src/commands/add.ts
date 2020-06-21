@@ -5,6 +5,9 @@ import { Logger } from "../Logger";
 import { Settings } from "../Settings";
 import { Validators } from "../Validators";
 import { showErrorFixSuggestions } from "../Suggestions";
+import { projectConfig } from "../Config";
+import * as nconf from "nconf";
+import * as path from "path";
 
 export default class Add extends Command {
     static description = "add a new key";
@@ -19,7 +22,15 @@ export default class Add extends Command {
     static examples = ['$ texterify add app.title "The name of the app."', "$ texterify add app.description"];
 
     async run() {
-        const { args } = this.parse(Add);
+        const { args, flags } = this.parse(Add);
+
+        if (flags["project-path"]) {
+            const configFilePath = path.join(flags["project-path"], "texterify.json");
+            const newProjectStore = new nconf.Provider();
+            newProjectStore.file({ file: configFilePath });
+            projectConfig.setStore(newProjectStore);
+            projectConfig.setKey("project_path", flags["project-path"]);
+        }
 
         const projectId = Settings.getProjectID();
         Validators.ensureProjectId(projectId);
