@@ -12,7 +12,7 @@ export default class Add extends Command {
 
     static args = [{ name: "name", required: true }, { name: "description" }];
 
-    static examples = [`$ texterify add app.title "The name of the app."`, `$ texterify add app.description`];
+    static examples = ['$ texterify add app.title "The name of the app."', "$ texterify add app.description"];
 
     async run() {
         const { args } = this.parse(Add);

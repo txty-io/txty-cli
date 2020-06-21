@@ -14,7 +14,7 @@ const ProjectsAPI = {
     },
 
     createProject: async (name: string, description: string) => {
-        return API.postRequest(`projects`, {
+        return API.postRequest("projects", {
             project: {
                 name: name,
                 description: description
@@ -23,7 +23,7 @@ const ProjectsAPI = {
     },
 
     updateProject: async (name: string, description: string) => {
-        return API.putRequest(`projects`, {
+        return API.putRequest("projects", {
             project: {
                 name: name,
                 description: description
@@ -36,7 +36,7 @@ const ProjectsAPI = {
     },
 
     import: async (projectId: string, languageId: string, file: any) => {
-        const fileBase64 = await getBase64(file);
+        const fileBase64 = getBase64(file);
 
         return API.postRequest(`projects/${projectId}/import`, {
             language_id: languageId,

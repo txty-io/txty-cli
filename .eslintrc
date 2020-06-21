@@ -8,7 +8,6 @@
         "project": "./tsconfig.json"
     },
     "plugins": ["prettier"],
-    "ignorePatterns": [],
     "rules": {
         "@typescript-eslint/array-type": ["error", { "type": "array" }],
         "@typescript-eslint/consistent-type-definitions": "error",

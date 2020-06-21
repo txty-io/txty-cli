@@ -1,17 +1,5 @@
-import {expect, test} from '@oclif/test'
+import { test } from "@oclif/test";
 
-describe('download', () => {
-  test
-  .stdout()
-  .command(['download'])
-  .it('runs hello', ctx => {
-    expect(ctx.stdout).to.contain('hello world')
-  })
-
-  test
-  .stdout()
-  .command(['download', '--name', 'jeff'])
-  .it('runs hello --name jeff', ctx => {
-    expect(ctx.stdout).to.contain('hello jeff')
-  })
-})
+describe("download", () => {
+    test.command(["download", "invalid"]).exit(2).it("fails with arg");
+});

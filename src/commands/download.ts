@@ -14,7 +14,7 @@ export default class Download extends Command {
 
     static args = [];
 
-    static examples = [`$ texterify download`];
+    static examples = ["$ texterify download"];
 
     async run() {
         this.parse(Download);
@@ -54,7 +54,7 @@ export default class Download extends Command {
             zip.extractAllTo(Settings.getExportDirectory(), true);
             fs.unlinkSync(zipName);
 
-            console.log(`Translations extracted.`);
+            console.log("Translations extracted.");
         });
         dest.on("error", (err: any) => {
             console.error("Error while downloading", err);
