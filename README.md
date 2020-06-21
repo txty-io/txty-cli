@@ -1,100 +1,83 @@
-texterify
-=========
+# Texterify CLI
 
-A CLI for Texterify
+[![Build Status](https://travis-ci.org/chrztoph/texterify-cli.svg?branch=master)](https://travis-ci.org/chrztoph/texterify-cli) [![License](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)](https://img.shields.io/github/license/chrztoph/texterify-cli.svg) [![Open Issues](https://img.shields.io/github/issues-raw/chrztoph/texterify-cli.svg)](https://img.shields.io/github/issues-raw/chrztoph/texterify-cli.svg)
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/texterify.svg)](https://npmjs.org/package/texterify)
-[![Downloads/week](https://img.shields.io/npm/dw/texterify.svg)](https://npmjs.org/package/texterify)
-[![License](https://img.shields.io/npm/l/texterify.svg)](https://github.com/chrztoph/texterify-cli/blob/master/package.json)
+**Official CLI to interact with Texterify.**
 
-<!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
-# Usage
-<!-- usage -->
-```sh-session
-$ npm install -g texterify
-$ texterify COMMAND
-running command...
-$ texterify (-v|--version|version)
-texterify/0.0.7 darwin-x64 node-v12.16.1
-$ texterify --help [COMMAND]
-USAGE
-  $ texterify COMMAND
-...
-```
-<!-- usagestop -->
-# Commands
-<!-- commands -->
-* [`texterify add NAME [DESCRIPTION]`](#texterify-add-name-description)
-* [`texterify download [FILE]`](#texterify-download-file)
-* [`texterify help [COMMAND]`](#texterify-help-command)
-* [`texterify init`](#texterify-init)
+This extension allows you to add keys and download your translations without leaving your terminal.
 
-## `texterify add NAME [DESCRIPTION]`
+For more information about Texterify visit https://github.com/chrztoph/texterify.
 
-Uploads a new key to Texterify.
+## Installation
 
-```
-USAGE
-  $ texterify add NAME [DESCRIPTION]
-
-OPTIONS
-  -h, --help  show CLI help
-
-EXAMPLES
-  $ texterify add app.title "The name of the app."
-  $ texterify add app.description
+```sh
+yarn global add texterify
 ```
 
-_See code: [src/commands/add.ts](https://github.com/chrztoph/texterify-cli/blob/v0.0.7/src/commands/add.ts)_
+or
 
-## `texterify download [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ texterify download [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+```sh
+npm install -g texterify
 ```
 
-_See code: [src/commands/download.ts](https://github.com/chrztoph/texterify-cli/blob/v0.0.7/src/commands/download.ts)_
+## Configuration
 
-## `texterify help [COMMAND]`
+The `texterify` utility can be configured by placing a `.texterify.json` in your home folder and a `texterify.json` file in your project folder (note the difference of the `.` at the beginning of the filenames).
 
-display help for texterify
+### Global Config
 
-```
-USAGE
-  $ texterify help [COMMAND]
+The authentication against the Texterify server is configured in the global `~/.texterify.json` configuration file. Make sure to always keep the global config file private.
 
-ARGUMENTS
-  COMMAND  command to show help for
-
-OPTIONS
-  --all  see all commands in CLI
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src/commands/help.ts)_
-
-## `texterify init`
-
-Initializes the project with a config file.
-
-```
-USAGE
-  $ texterify init
-
-OPTIONS
-  -h, --help  show CLI help
+Example `~/.texterify.json`
+```json
+{
+    "auth_email": "email@example.com",
+    "auth_secret": "aG2DzuoWG30a3IHwOKMQUg"
+}
 ```
 
-_See code: [src/commands/init.ts](https://github.com/chrztoph/texterify-cli/blob/v0.0.7/src/commands/init.ts)_
-<!-- commandsstop -->
+| Option | Description | Optional |
+| --- | --- | --- |
+| auth_email | The email you use to log in on Texterify. | No |
+| auth_secret | An access token you can generate at https://texterify.com/dashboard/settings/access-tokens. | No |
+
+### Project Config
+
+It is recommended that you put the project config `texterify.json` in the root directory of your project (otherwise you need to set `project_path`).
+
+No sensitive data should be stored in your project config so you can safely check this file in with your code and share it with others.
+
+Example `texterify.json`
+```json
+{
+    "api_base_url": "https://texterify.com/api",
+    "api_version": "v1",
+    "project_id": "b53faf34-934a-491b-84aa-d880f3c2bce8",
+    "export_configuration_id": "9bd1edfc-9d43-449d-9e51-7990630baf74",
+    "export_directory": "translations",
+    "project_path": ""
+}
+```
+
+| Option | Description | Optional |
+| --- | --- | --- |
+| api_base_url | The path where the API is located usually ending in `/api`. | No |
+| api_version | The version of the API (for now only `v1` is available). | No |
+| project_id | The project you want to manage. The project ID can be found on the project overview site or in the URL of the project sites. | No |
+| export_configuration_id | The ID of the export configuration. | No |
+| export_directory | The directory where your translations will be exported to. | No |
+| project_path | The path to your project. This can also be configured with `--project-path` on the command line. | Yes |
+
+## Usage
+
+If you have successfully configured your project you can try to do `texterify <command>` in the directory where you placed your project config. To get a list of all commands your current version supports try `texterify -h`.
+
+## Contributing
+
+Use the `./bin/run` command to build and run the program.
+
+## License
+
+[![License](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
