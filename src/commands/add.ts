@@ -10,7 +10,8 @@ export default class Add extends Command {
     static description = "add a new key";
 
     static flags = {
-        help: flags.help({ char: "h" })
+        help: flags.help({ char: "h" }),
+        "project-path": flags.string()
     };
 
     static args = [{ name: "name", required: true }, { name: "description" }];

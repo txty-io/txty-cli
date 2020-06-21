@@ -13,7 +13,8 @@ export default class Download extends Command {
     static description = "download the translations";
 
     static flags = {
-        help: flags.help({ char: "h" })
+        help: flags.help({ char: "h" }),
+        "project-path": flags.string()
     };
 
     static args = [];
