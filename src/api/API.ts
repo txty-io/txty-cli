@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import * as queryString from "query-string";
-import { globalConfig } from "../config";
-import { Settings } from "../settings";
+import { globalConfig } from "../Config";
+import { Settings } from "../Settings";
 import { CLIError } from "@oclif/errors";
 
 const DEFAULT_HEADERS = {

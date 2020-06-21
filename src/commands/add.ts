@@ -1,5 +1,5 @@
 import { Command, flags } from "@oclif/command";
-import { Settings } from "../settings";
+import { Settings } from "../Settings";
 import { KeysAPI } from "../api/KeysAPI";
 import { ErrorUtils } from "../api/ErrorUtils";
 

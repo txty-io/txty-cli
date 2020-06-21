@@ -1,6 +1,6 @@
 import { Command, flags } from "@oclif/command";
 import { ProjectsAPI } from "../api/ProjectsAPI";
-import { Settings } from "../settings";
+import { Settings } from "../Settings";
 import * as path from "path";
 import fs from "fs";
 import AdmZip from "adm-zip";
