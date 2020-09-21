@@ -7,4 +7,5 @@ cache: yarn
 script:
   - ./bin/run --version
   - ./bin/run --help
+  - "echo '{ \"auth_email\": \"auth_email\", \"auth_secret\": \"auth_secret\" }' > ~/.texterify.json"
   - yarn run test

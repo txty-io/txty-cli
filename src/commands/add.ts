@@ -10,7 +10,7 @@ import * as nconf from "nconf";
 import * as path from "path";
 
 export default class Add extends Command {
-    static description = "add a new key";
+    static description = "add a new key with an optional default language translation content";
 
     static flags = {
         help: flags.help({ char: "h" }),
