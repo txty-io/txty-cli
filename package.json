@@ -1,7 +1,7 @@
 {
   "name": "texterify",
   "description": "A CLI for Texterify (https://github.com/chrztoph/texterify).",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "author": "Christoph Werner @chrztoph",
   "bin": {
     "texterify": "./bin/run"
@@ -42,11 +42,11 @@
     "eslint-plugin-react": "^7.19.0",
     "globby": "^10",
     "mocha": "^5",
+    "nock": "^13.0.4",
     "nyc": "^14",
     "prettier": "^2.0.5",
     "ts-node": "^8",
-    "typescript": "^3.3",
-    "nock": "^13.0.4"
+    "typescript": "^3.3"
   },
   "engines": {
     "node": ">=8.0.0"
