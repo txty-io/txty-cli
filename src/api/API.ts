@@ -4,7 +4,6 @@ import { globalConfig } from "../Config";
 import { Logger } from "../Logger";
 import { Settings } from "../Settings";
 import { Validators } from "../Validators";
-import { showErrorFixSuggestions } from "../Suggestions";
 
 const DEFAULT_HEADERS = {
     Accept: "application/json",

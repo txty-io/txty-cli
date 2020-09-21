@@ -14,12 +14,16 @@ export default class Add extends Command {
 
     static flags = {
         help: flags.help({ char: "h" }),
-        "project-path": flags.string()
+        "project-path": flags.string(),
+        description: flags.string()
     };
 
-    static args = [{ name: "name", required: true }, { name: "description" }];
+    static args = [{ name: "name", required: true }, { name: "content" }];
 
-    static examples = ['$ texterify add app.title "The name of the app."', "$ texterify add app.description"];
+    static examples = [
+        '$ texterify add "app.title" "MyApp" --description "The name of the app."',
+        '$ texterify add "app.description" "My app description"'
+    ];
 
     async run() {
         const { args, flags } = this.parse(Add);
@@ -37,7 +41,12 @@ export default class Add extends Command {
 
         let response;
         try {
-            response = await KeysAPI.createKey(projectId, args.name, args.description || "");
+            response = await KeysAPI.createKey({
+                projectId: projectId,
+                name: args.name,
+                description: flags.description || "",
+                defaultLanguageTranslation: args.content
+            });
         } catch (error) {
             Logger.error("Failed to add key.");
             showErrorFixSuggestions(error);
