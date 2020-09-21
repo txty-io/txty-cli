@@ -1,3 +1,6 @@
+import { exit } from "process";
+import { Logger } from "../Logger";
+import { Validators } from "../Validators";
 import { API } from "./API";
 import { TranslationsAPI } from "./TranslationsAPI";
 
@@ -17,12 +20,16 @@ const KeysAPI = {
             description: options.description
         });
 
-        if (options.defaultLanguageTranslation) {
-            await TranslationsAPI.createTranslation({
+        if (newKey.data && options.defaultLanguageTranslation) {
+            const newTranslationResponse = await TranslationsAPI.createTranslation({
                 content: options.defaultLanguageTranslation,
                 keyId: newKey.data.attributes.id,
                 projectId: options.projectId
             });
+
+            if (newTranslationResponse.error === "NO_DEFAULT_LANGUAGE_SPECIFIED") {
+                Logger.error("You need to define a default language if you want to add translations directly.");
+            }
         }
 
         return newKey;
