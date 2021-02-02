@@ -16,7 +16,8 @@ export default class Download extends Command {
 
     static flags = {
         help: flags.help({ char: "h" }),
-        "project-path": flags.string()
+        "project-path": flags.string(),
+        emojify: flags.boolean()
     };
 
     static args = [];
@@ -45,7 +46,9 @@ export default class Download extends Command {
                 title: "Downloading translations...",
                 task: async (ctx) => {
                     try {
-                        const response = await ProjectsAPI.export(projectId, exportConfigId);
+                        const response = await ProjectsAPI.export(projectId, exportConfigId, {
+                            emojify: flags.emojify
+                        });
 
                         ctx.exportResponse = response;
                     } catch (error) {
@@ -63,7 +66,7 @@ export default class Download extends Command {
                     const dest = fs.createWriteStream(zipName);
                     ctx.exportResponse.body.pipe(dest);
 
-                    const promise = new Promise((resolve, reject) => {
+                    const promise = new Promise<void>((resolve, reject) => {
                         dest.on("finish", () => {
                             task.output = `Extracting translations to "${Settings.getExportDirectory()}".`;
 

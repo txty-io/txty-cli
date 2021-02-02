@@ -1,8 +1,10 @@
 {
-  "api_base_url": "https://api.texterify.com",
-  "api_version": "v1",
-  "project_id": "ecfb3317-12e9-446f-9a30-2bef801e8ae9",
-  "export_configuration_id": "73e7dd69-15f9-4f7c-9814-eedc29abd3cd",
-  "export_directory": "export",
-  "project_path": ""
+    "api_base_url": "http://localhost:3000/api",
+    "api_version": "v1",
+    "project_id": "0e4a88fd-1d86-4ddd-bbaa-c5784ea5624f",
+    "export_configuration_id": "8bae7a79-03a8-47b0-bfa2-3a51f43baca9",
+    "export_directory": "export",
+    "project_path": "",
+    "_auth_email": "test1@texterify.com",
+    "_auth_secret": "SECRET"
 }

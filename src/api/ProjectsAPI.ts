@@ -31,8 +31,8 @@ const ProjectsAPI = {
         });
     },
 
-    export: (projectId: string, exportConfigId: string) => {
-        return API.getRequest(`projects/${projectId}/exports/${exportConfigId}`, null, null, true);
+    export: (projectId: string, exportConfigId: string, options: { emojify: boolean }) => {
+        return API.getRequest(`projects/${projectId}/exports/${exportConfigId}`, options, null, true);
     },
 
     import: async (projectId: string, languageId: string, file: any) => {
