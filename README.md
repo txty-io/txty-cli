@@ -72,6 +72,16 @@ Example `texterify.json`
 
 If you have successfully configured your project you can try to do `texterify <command>` in the directory where you placed your project config. To get a list of all commands your current version supports try `texterify -h`.
 
+## Upgrade
+
+```sh
+yarn global upgrade texterify@latest
+```
+
+```sh
+npm install -g texterify@latest
+```
+
 ## Contributing
 
 Use the `./bin/run` command to build and run the program.
