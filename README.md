@@ -50,7 +50,7 @@ No sensitive data should be stored in your project config so you can safely chec
 Example `texterify.json`
 ```json
 {
-    "api_base_url": "https://texterify.com/api",
+    "api_base_url": "https://app.texterify.com/api",
     "api_version": "v1",
     "project_id": "b53faf34-934a-491b-84aa-d880f3c2bce8",
     "export_configuration_id": "9bd1edfc-9d43-449d-9e51-7990630baf74",
