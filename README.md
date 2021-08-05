@@ -6,7 +6,7 @@
 
 This extension allows you to add keys and download your translations without leaving your terminal.
 
-For more information about Texterify visit https://github.com/chrztoph/texterify.
+For more information about Texterify visit https://github.com/texterify/texterify.
 
 ## Installation
 
@@ -39,7 +39,7 @@ Example `~/.texterify.json`
 | Option | Description | Optional |
 | --- | --- | --- |
 | auth_email | The email you use to log in on Texterify. | No |
-| auth_secret | An access token you can generate at https://texterify.com/dashboard/settings/access-tokens. | No |
+| auth_secret | An access token you can generate at https://app.texterify.com/dashboard/settings/access-tokens. | No |
 
 ### Project Config
 
