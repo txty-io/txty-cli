@@ -1,5 +1,6 @@
 import { exit } from "process";
 import { Logger } from "./Logger";
+import * as fs from "fs";
 
 const ERROR_EXIT_CODE = 1;
 
@@ -45,6 +46,13 @@ export const Validators = {
     ensureAuthSecret: (authSecret: string) => {
         if (!authSecret) {
             Logger.error("Please specify the auth secret ~/.texterify.json (auth_secret)");
+            exit(ERROR_EXIT_CODE);
+        }
+    },
+
+    ensureFileExists: (configName: string, errorString: string) => {
+        if (!fs.existsSync(configName)) {
+            Logger.error(errorString, configName);
             exit(ERROR_EXIT_CODE);
         }
     },
