@@ -1,11 +1,11 @@
 import { Command, flags } from "@oclif/command";
-import { ErrorUtils } from "../api/ErrorUtils";
-import { KeysAPI } from "../api/KeysAPI";
-import { Logger } from "../Logger";
-import { Settings } from "../Settings";
-import { Validators } from "../Validators";
-import { showErrorFixSuggestions } from "../Suggestions";
-import { globalConfig, projectConfig } from "../Config";
+import { ErrorUtils } from "./api/ErrorUtils";
+import { KeysAPI } from "./api/KeysAPI";
+import { Logger } from "./Logger";
+import { Settings } from "./Settings";
+import { Validators } from "./Validators";
+import { showErrorFixSuggestions } from "./Suggestions";
+import { globalConfig, projectConfig } from "./Config";
 import * as nconf from "nconf";
 import * as path from "path";
 import { cli } from "cli-ux";
