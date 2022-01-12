@@ -86,6 +86,15 @@ npm install -g texterify@latest
 
 Use the `./bin/run` command to build and run the program.
 
+## Release a new version
+
+Run the following commands:
+
+```
+yarn version
+yarn release
+```
+
 ## License
 
 [![License](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)
