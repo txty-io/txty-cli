@@ -1,4 +1,3 @@
-import { Command, flags } from "@oclif/command";
 import AdmZip from "adm-zip";
 import fs from "fs";
 import Listr from "listr";
@@ -10,14 +9,21 @@ import { Validators } from "../Validators";
 import { showErrorFixSuggestions } from "../Suggestions";
 import { projectConfig } from "../Config";
 import * as nconf from "nconf";
+import { ErrorUtils } from "../api/ErrorUtils";
+import { Command, Flags } from "@oclif/core";
+import { auth_email_flag } from "../flags/auth_email_flag";
+import { auth_secret_flag } from "../flags/auth_secret_flag";
+import { help_flag } from "../flags/help_flag";
 
 export default class Download extends Command {
     static description = "download the translations";
 
     static flags = {
-        help: flags.help({ char: "h" }),
-        "project-path": flags.string(),
-        emojify: flags.boolean()
+        help: help_flag,
+        "project-path": Flags.string(),
+        emojify: Flags.boolean(),
+        "auth-email": auth_email_flag,
+        "auth-secret": auth_secret_flag
     };
 
     static args = [];
@@ -25,7 +31,7 @@ export default class Download extends Command {
     static examples = ["$ texterify download"];
 
     async run() {
-        const { flags } = this.parse(Download);
+        const { flags } = await this.parse(Download);
 
         if (flags["project-path"]) {
             const configFilePath = path.join(flags["project-path"], "texterify.json");
@@ -46,15 +52,27 @@ export default class Download extends Command {
                 title: "Downloading translations...",
                 task: async (ctx) => {
                     try {
-                        const response = await ProjectsAPI.export(projectId, exportConfigId, {
+                        let response: any = await ProjectsAPI.export(projectId, exportConfigId, {
                             emojify: flags.emojify
                         });
 
-                        ctx.exportResponse = response;
+                        if (response.status !== 200) {
+                            response = await response.json();
+                            if (response?.error) {
+                                ErrorUtils.getAndPrintErrors(response);
+                                throw new Error();
+                            }
+
+                            Logger.error("Failed to download translations.");
+
+                            throw new Error();
+                        } else {
+                            ctx.exportResponse = response;
+                        }
                     } catch (error) {
                         Logger.error("Failed to download translations.");
                         showErrorFixSuggestions(error);
-                        Validators.exitWithError();
+                        throw new Error();
                     }
                 }
             },
@@ -70,8 +88,13 @@ export default class Download extends Command {
                         dest.on("finish", () => {
                             task.output = `Extracting translations to "${Settings.getExportDirectory()}".`;
 
-                            const zip = new AdmZip(zipName);
-                            zip.extractAllTo(Settings.getExportDirectory(), true);
+                            try {
+                                const zip = new AdmZip(zipName);
+                                zip.extractAllTo(Settings.getExportDirectory(), true);
+                            } catch (error) {
+                                Logger.error("Failed to extract translations.");
+                                reject(error);
+                            }
                             fs.unlinkSync(zipName);
 
                             resolve();
@@ -92,9 +115,9 @@ export default class Download extends Command {
             await tasks.run();
             Logger.success("\nSuccessfully downloaded and extracted translations.");
         } catch (error) {
-            Logger.error("Failed to download translations.");
+            Logger.error("Failed to download and extract translations.");
             showErrorFixSuggestions(error);
-            Validators.exitWithError();
+            Validators.exitWithError(this);
         }
     }
 }

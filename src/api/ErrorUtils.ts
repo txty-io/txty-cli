@@ -30,6 +30,7 @@ export interface IErrorsResponse {
     error: boolean;
     message: string;
     details: IErrors;
+    errors: IErrors;
 }
 
 export const ErrorUtils = {
@@ -66,9 +67,9 @@ export const ErrorUtils = {
             Logger.error(errorResponse.message);
         }
 
-        if (errorResponse.details) {
-            if (typeof errorResponse.details === "object") {
-                const errorMessages = ErrorUtils.getErrors(errorResponse.details);
+        if (errorResponse.details || errorResponse.errors) {
+            if (typeof errorResponse.details === "object" || typeof errorResponse.errors === "object") {
+                const errorMessages = ErrorUtils.getErrors(errorResponse.details || errorResponse.errors);
                 errorMessages.forEach((error) => {
                     Logger.error(error);
                 });

@@ -15,13 +15,13 @@ const KeysAPI = {
         defaultLanguageTranslation?: string;
         description: string;
     }) => {
-        const newKey = await API.postRequest(`projects/${options.projectId}/keys`, {
+        const newKey: any = await API.postRequest(`projects/${options.projectId}/keys`, {
             name: options.name,
             description: options.description
         });
 
         if (!newKey.error && newKey.data && options.defaultLanguageTranslation) {
-            const newTranslationResponse = await TranslationsAPI.createTranslation({
+            const newTranslationResponse: any = await TranslationsAPI.createTranslation({
                 content: options.defaultLanguageTranslation,
                 keyId: newKey.data.attributes.id,
                 projectId: options.projectId

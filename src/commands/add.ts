@@ -1,4 +1,4 @@
-import { Command, flags } from "@oclif/command";
+import { Command, Flags } from "@oclif/core";
 import { ErrorUtils } from "../api/ErrorUtils";
 import { KeysAPI } from "../api/KeysAPI";
 import { Logger } from "../Logger";
@@ -8,14 +8,19 @@ import { showErrorFixSuggestions } from "../Suggestions";
 import { projectConfig } from "../Config";
 import * as nconf from "nconf";
 import * as path from "path";
+import { auth_email_flag } from "../flags/auth_email_flag";
+import { auth_secret_flag } from "../flags/auth_secret_flag";
+import { help_flag } from "../flags/help_flag";
 
 export default class Add extends Command {
     static description = "add a new key with an optional default language translation content";
 
     static flags = {
-        help: flags.help({ char: "h" }),
-        "project-path": flags.string(),
-        description: flags.string()
+        help: help_flag,
+        "project-path": Flags.string(),
+        description: Flags.string({ description: "Description of the key." }),
+        "auth-email": auth_email_flag,
+        "auth-secret": auth_secret_flag
     };
 
     static args = [{ name: "name", required: true }, { name: "content" }];
@@ -26,7 +31,7 @@ export default class Add extends Command {
     ];
 
     async run() {
-        const { args, flags } = this.parse(Add);
+        const { args, flags } = await this.parse(Add);
 
         if (flags["project-path"]) {
             const configFilePath = path.join(flags["project-path"], "texterify.json");
@@ -39,7 +44,7 @@ export default class Add extends Command {
         const projectId = Settings.getProjectID();
         Validators.ensureProjectId(projectId);
 
-        let response;
+        let response: any;
         try {
             response = await KeysAPI.createKey({
                 projectId: projectId,
@@ -50,12 +55,12 @@ export default class Add extends Command {
         } catch (error) {
             Logger.error("Failed to add key.");
             showErrorFixSuggestions(error);
-            Validators.exitWithError();
+            Validators.exitWithError(this);
         }
 
-        if (response?.errors) {
-            ErrorUtils.getAndPrintErrors(response.errors);
-            Validators.exitWithError();
+        if (response?.error) {
+            ErrorUtils.getAndPrintErrors(response);
+            Validators.exitWithError(this);
         } else {
             Logger.success(`Successfully added key "${args.name}".`);
         }

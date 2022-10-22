@@ -1,7 +1,9 @@
 import { exit } from "process";
 import { Logger } from "./Logger";
 import * as fs from "fs";
+import { Command } from "@oclif/core";
 
+const SUCCESS_EXIT_CODE = 0;
 const ERROR_EXIT_CODE = 1;
 
 export const Validators = {
@@ -57,7 +59,7 @@ export const Validators = {
         }
     },
 
-    exitWithError: () => {
-        exit(ERROR_EXIT_CODE);
+    exitWithError: (that: Command) => {
+        that.exit(ERROR_EXIT_CODE);
     }
 };
