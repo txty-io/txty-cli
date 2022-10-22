@@ -16,40 +16,66 @@ export const ERRORS: { [key: string]: ERRORS_MESSAGE_IDS } = {
     BLANK: "blank"
 };
 
-export interface IError {
-    error: ERRORS_MESSAGE_IDS;
+export type IError =
+    | {
+          error: ERRORS_MESSAGE_IDS;
+      }
+    | ERRORS_MESSAGE_IDS;
+
+export interface IErrors {
+    [field: string]: IError[] | IError;
 }
 
 export interface IErrorsResponse {
-    [field: string]: IError[];
+    error: boolean;
+    message: string;
+    details: IErrors;
 }
 
 export const ErrorUtils = {
-    hasError(field: string, error: ERRORS_MESSAGE_IDS, errors: IErrorsResponse) {
-        const fieldErrors = errors[field];
-        return fieldErrors?.some((fieldError) => {
-            return fieldError.error === error;
-        });
-    },
-
-    getErrors(errors: IErrorsResponse) {
+    getErrors(errors: IErrors) {
         const keys = Object.keys(errors);
         const errorMessages: string[] = [];
 
         keys.forEach((key) => {
-            errors[key].forEach((error) => {
-                errorMessages.push(this.getErrorMessage(key, error.error));
-            });
+            if (errors[key] instanceof Array) {
+                (errors[key] as IErrors[]).forEach((error) => {
+                    if (typeof error === "object") {
+                        errorMessages.push(
+                            this.getErrorMessage(
+                                key,
+                                (error as {
+                                    error: ERRORS_MESSAGE_IDS;
+                                }).error
+                            )
+                        );
+                    } else {
+                        errorMessages.push(this.getErrorMessage(key, error));
+                    }
+                });
+            } else if (typeof errors[key] === "string") {
+                errorMessages.push(this.getErrorMessage(key, errors[key] as ERRORS_MESSAGE_IDS));
+            }
         });
 
         return errorMessages;
     },
 
-    getAndPrintErrors(errors: IErrorsResponse) {
-        const errorMessages = ErrorUtils.getErrors(errors);
-        errorMessages.forEach((error) => {
-            Logger.error(error);
-        });
+    getAndPrintErrors(errorResponse: IErrorsResponse) {
+        if (errorResponse.message) {
+            Logger.error(errorResponse.message);
+        }
+
+        if (errorResponse.details) {
+            if (typeof errorResponse.details === "object") {
+                const errorMessages = ErrorUtils.getErrors(errorResponse.details);
+                errorMessages.forEach((error) => {
+                    Logger.error(error);
+                });
+            } else {
+                Logger.error(errorResponse.details);
+            }
+        }
     },
 
     getErrorMessage(name: string, error: ERRORS_MESSAGE_IDS) {

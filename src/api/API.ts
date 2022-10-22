@@ -67,11 +67,11 @@ async function request(url: string, method: string, headers: any, params: any, i
             response = await fetch(fullURL, options);
             if (response.status !== 200 && response.status !== 400) {
                 if (response.status === 404) {
-                    throw new Error(
+                    Logger.error(
                         "The resource could not be found. Maybe your auth credentials are wrong or you don't have the permission to access this resource."
                     );
                 } else {
-                    throw new Error(`Invalid response status received: ${response.status}`);
+                    Logger.error(`Invalid response status received: ${response.status}`);
                 }
             }
         } catch (error) {

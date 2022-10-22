@@ -8,5 +8,9 @@ export function showErrorFixSuggestions(error: any) {
         }
     }
     Logger.printErrorSeparator();
-    Logger.log(error);
+    if (error.message) {
+        Logger.error(error.message);
+    } else {
+        Logger.error(error);
+    }
 }

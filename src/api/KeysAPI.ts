@@ -20,7 +20,7 @@ const KeysAPI = {
             description: options.description
         });
 
-        if (newKey.data && options.defaultLanguageTranslation) {
+        if (!newKey.error && newKey.data && options.defaultLanguageTranslation) {
             const newTranslationResponse = await TranslationsAPI.createTranslation({
                 content: options.defaultLanguageTranslation,
                 keyId: newKey.data.attributes.id,
@@ -28,7 +28,9 @@ const KeysAPI = {
             });
 
             if (newTranslationResponse.error === "NO_DEFAULT_LANGUAGE_SPECIFIED") {
-                Logger.error("You need to define a default language if you want to add translations directly.");
+                Logger.error(
+                    "You need to define a default language if you want to add translations for your default language directly when creating a new key."
+                );
             }
         }
 
