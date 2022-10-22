@@ -1,13 +1,13 @@
-import { Command, flags } from "@oclif/command";
+import { Command, Flags } from "@oclif/core";
 import * as fs from "fs";
 import open from "open";
 import { Validators } from "../Validators";
 
 export default class Open extends Command {
-    static description = "Open texterify website for the current project";
+    static description = "open texterify website for the current project";
 
     static flags = {
-        help: flags.help({ char: "h" })
+        help: Flags.help({ char: "h" })
     };
     static examples = ["$ texterify open"];
 
