@@ -1,7 +1,7 @@
 {
     "name": "texterify",
     "description": "A CLI for Texterify (https://github.com/chrztoph/texterify).",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": "Christoph Werner @chrztoph",
     "bin": {
         "texterify": "./bin/run"
