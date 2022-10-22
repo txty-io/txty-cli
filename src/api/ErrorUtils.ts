@@ -16,11 +16,11 @@ export const ERRORS: { [key: string]: ERRORS_MESSAGE_IDS } = {
     BLANK: "blank"
 };
 
-export type IError =
-    | {
-          error: ERRORS_MESSAGE_IDS;
-      }
-    | ERRORS_MESSAGE_IDS;
+interface IErrorObject {
+    error: ERRORS_MESSAGE_IDS;
+}
+
+export type IError = IErrorObject | ERRORS_MESSAGE_IDS;
 
 export interface IErrors {
     [field: string]: IError[] | IError;
@@ -42,14 +42,7 @@ export const ErrorUtils = {
             if (errors[key] instanceof Array) {
                 (errors[key] as IErrors[]).forEach((error) => {
                     if (typeof error === "object") {
-                        errorMessages.push(
-                            this.getErrorMessage(
-                                key,
-                                (error as {
-                                    error: ERRORS_MESSAGE_IDS;
-                                }).error
-                            )
-                        );
+                        errorMessages.push(this.getErrorMessage(key, (error as IErrorObject).error));
                     } else {
                         errorMessages.push(this.getErrorMessage(key, error));
                     }
