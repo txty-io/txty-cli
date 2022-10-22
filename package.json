@@ -90,6 +90,7 @@
         "version": "oclif-dev readme && git add README.md",
         "lint": "eslint . --ext .ts --config .eslintrc",
         "release": "yarn publish",
+        "start": "./bin/dev",
         "start:watcher": "./node_modules/.bin/tsc -p . -w"
     },
     "types": "lib/index.d.ts"

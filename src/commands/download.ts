@@ -32,6 +32,10 @@ export default class Download extends Command {
 
     async run() {
         const { flags } = await this.parse(Download);
+        Settings.setAuthCredentialsPassedViaCLI({
+            email: flags["auth-email"],
+            secret: flags["auth-secret"]
+        });
 
         if (flags["project-path"]) {
             const configFilePath = path.join(flags["project-path"], "texterify.json");

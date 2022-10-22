@@ -25,27 +25,12 @@ async function request(url: string, method: string, headers: any, params: any, i
 
         let fullURL = `${apiBaseUrl}/${apiVersion}/${url}`;
 
-        const authEmail = globalConfig.getKey("auth_email");
+        const authEmail = Settings.getAuthEmail();
         requestHeaders["Auth-Email"] = authEmail;
         Validators.ensureAuthEmail(authEmail);
 
-        const authSecret = globalConfig.getKey("auth_secret");
+        const authSecret = Settings.getAuthSecret();
         requestHeaders["Auth-Secret"] = authSecret;
-
-        if (projectConfig.getKey("_auth_email")) {
-            Logger.warn(
-                "WARNING: Save your auth email in the global config to keep it secure (learn more here: https://github.com/chrztoph/texterify-cli#global-config)."
-            );
-            requestHeaders["Auth-Email"] = projectConfig.getKey("_auth_email");
-        }
-
-        if (projectConfig.getKey("_auth_secret")) {
-            Logger.warn(
-                "WARNING: Save your auth secret in the global config to keep it secure (learn more here: https://github.com/chrztoph/texterify-cli#global-config)."
-            );
-            requestHeaders["Auth-Secret"] = projectConfig.getKey("_auth_secret");
-        }
-
         Validators.ensureAuthSecret(authSecret);
 
         // Add query params if it is a get request.

@@ -42,9 +42,13 @@ Example `~/.texterify.json`
 | auth_email  | The email you use to log in on Texterify.                                                       | No       |
 | auth_secret | An access token you can generate at https://app.texterify.com/dashboard/settings/access-tokens. | No       |
 
-### Authenticate by passing auth params to commands
+### Authenticate by passing auth credentials to commands
 
-### Project Config
+You can also pass the auth credentials to the CLI tool by adding `--auth-email=<value>` and `--auth-secret=<value>` to your command.
+
+CLI passed auth credentials have precedence over those defined in the global config.
+
+## Project Config
 
 It is recommended that you put the project config `texterify.json` in the root directory of your project (otherwise you need to set `project_path`).
 
@@ -88,8 +92,12 @@ npm install -g texterify@latest
 
 ## Contributing
 
-Start the watcher with `yarn start:watcher`.
-Use the `./bin/dev` command to run the program.
+Start the watcher with `yarn start:watcher` so your source code gets automatically compiled.
+Use the `yarn start` command to run the program.
+
+### Example command for testing
+
+`yarn start add "my.key" "my description" --auth-email=test1@texterify.com --auth-secret=SECRET`
 
 ## Release a new version
 

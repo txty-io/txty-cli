@@ -32,6 +32,10 @@ export default class Add extends Command {
 
     async run() {
         const { args, flags } = await this.parse(Add);
+        Settings.setAuthCredentialsPassedViaCLI({
+            email: flags["auth-email"],
+            secret: flags["auth-secret"]
+        });
 
         if (flags["project-path"]) {
             const configFilePath = path.join(flags["project-path"], "texterify.json");

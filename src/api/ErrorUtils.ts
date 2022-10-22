@@ -29,8 +29,8 @@ export interface IErrors {
 export interface IErrorsResponse {
     error: boolean;
     message: string;
-    details: IErrors;
-    errors: IErrors;
+    details?: IErrors;
+    errors?: IErrors;
 }
 
 export const ErrorUtils = {
@@ -40,9 +40,9 @@ export const ErrorUtils = {
 
         keys.forEach((key) => {
             if (errors[key] instanceof Array) {
-                (errors[key] as IErrors[]).forEach((error) => {
+                (errors[key] as IError[]).forEach((error) => {
                     if (typeof error === "object") {
-                        errorMessages.push(this.getErrorMessage(key, (error as IErrorObject).error));
+                        errorMessages.push(this.getErrorMessage(key, error.error));
                     } else {
                         errorMessages.push(this.getErrorMessage(key, error));
                     }
@@ -60,9 +60,11 @@ export const ErrorUtils = {
             Logger.error(errorResponse.message);
         }
 
-        if (errorResponse.details || errorResponse.errors) {
-            if (typeof errorResponse.details === "object" || typeof errorResponse.errors === "object") {
-                const errorMessages = ErrorUtils.getErrors(errorResponse.details || errorResponse.errors);
+        const errors = errorResponse.details || errorResponse.errors;
+
+        if (errors) {
+            if (typeof errors === "object") {
+                const errorMessages = ErrorUtils.getErrors(errors);
                 errorMessages.forEach((error) => {
                     Logger.error(error);
                 });
