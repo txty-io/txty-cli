@@ -1,45 +1,54 @@
 # Used in GitHub CI.
 # Don't use this config to run the service in production.
 
-version: "3"
+version: "3.7"
 volumes:
-  database: {}
+  texterify-database:
+    external:
+      name: texterify-database
+  texterify-assets:
+    external:
+      name: texterify-assets
 services:
   db:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     image: postgres:12.2
     volumes:
-      - database:/var/lib/postgresql/data
+      - texterify-database:/var/lib/postgresql/data
   app:
+    image: chrztoph/texterify:${TEXTERIFY_TAG}
     environment:
-      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
-      - DB_TEST_HOST=${DB_TEST_HOST}
-      - DB_TEST_USERNAME=${DB_TEST_USERNAME}
-    image: chrztoph/texterify:test
-    build:
-      context: .
-      args:
-        SENTRY_SOURCE_MAPS_ORGANIZATION: texterify
-        COMMIT_HASH: ${GITHUB_SHA}
-        PROPRIETARY_MODE: "true"
-        RAILS_ENV_ARG: test
-        NODE_ENV_ARG: production
-      dockerfile: Dockerfile
+      - SECRET_KEY_BASE=abd834a091ca2069a660b50dd50cffa0b9d5f6bd51395da186f07785c14f14bb52109b4d8bb3344cb8eb31ada9dd2a10a3422ef73317c0923ee32a732557faac
+      - DB_DEV_HOST=db
+      - DB_DEV_USERNAME=postgres
+      - DB_TEST_HOST=db
+      - DB_TEST_USERNAME=postgres
     depends_on:
       - db
     volumes:
-      - ./coverage:/var/www/texterify/coverage
+      - texterify-assets:/var/www/texterify/storage
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+      args:
+        BUILDER_IMAGE: chrztoph/texterify:${TEXTERIFY_TAG}
+    depends_on:
+      - app
+    ports:
+      - 80:80
   sidekiq:
-    image: chrztoph/texterify:test
+    image: chrztoph/texterify:${TEXTERIFY_TAG}
     environment:
-      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
-      - DB_TEST_HOST=${DB_TEST_HOST}
-      - DB_TEST_USERNAME=${DB_TEST_USERNAME}
+      - SECRET_KEY_BASE=abd834a091ca2069a660b50dd50cffa0b9d5f6bd51395da186f07785c14f14bb52109b4d8bb3344cb8eb31ada9dd2a10a3422ef73317c0923ee32a732557faac
+      - DB_DEV_HOST=db
+      - DB_DEV_USERNAME=postgres
+      - DB_TEST_HOST=db
+      - DB_TEST_USERNAME=postgres
     depends_on:
       - db
       - redis
     command: bundle exec sidekiq
-
   redis:
     image: redis:6.2.0-alpine
