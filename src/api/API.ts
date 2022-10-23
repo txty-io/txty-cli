@@ -59,7 +59,7 @@ async function request(url: string, method: string, headers: any, params: any, i
                     Logger.error(`Invalid response status received: ${response.status}`);
                 }
 
-                throw await response.json();
+                throw JSON.stringify(await response.json());
             }
         } catch (error) {
             throw error;
@@ -67,7 +67,7 @@ async function request(url: string, method: string, headers: any, params: any, i
 
         return response && !isFileDownload ? response.json() : response;
     } catch (error) {
-        Logger.error(error);
+        Logger.error("Error:", error);
         throw error;
     }
 }
