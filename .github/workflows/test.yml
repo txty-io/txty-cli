@@ -31,3 +31,6 @@ jobs:
 
       - name: Run tests
         run: yarn test
+
+      - name: Output docker app logs
+        run: docker logs texterify-cli-app-1
