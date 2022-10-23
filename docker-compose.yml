@@ -28,16 +28,9 @@ services:
       - db
     volumes:
       - texterify-assets:/var/www/texterify/storage
-  web:
-    build:
-      context: .
-      dockerfile: ./docker/web/Dockerfile
-      args:
-        BUILDER_IMAGE: chrztoph/texterify:${TEXTERIFY_TAG}
-    depends_on:
-      - app
     ports:
       - 80:80
+
   sidekiq:
     image: chrztoph/texterify:${TEXTERIFY_TAG}
     environment:
