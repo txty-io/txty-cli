@@ -57,6 +57,7 @@ async function request(url: string, method: string, headers: any, params: any, i
                     );
                 } else {
                     Logger.error(`Invalid response status received: ${response.status}`);
+                    console.log(response.body.read());
                 }
             }
         } catch (error) {
