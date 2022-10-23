@@ -29,7 +29,7 @@ services:
     volumes:
       - texterify-assets:/var/www/texterify/storage
     ports:
-      - 80:80
+      - 80:3000
 
   sidekiq:
     image: chrztoph/texterify:${TEXTERIFY_TAG}
