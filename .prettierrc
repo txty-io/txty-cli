@@ -4,5 +4,31 @@
   "tabWidth": 4,
   "htmlWhitespaceSensitivity": "ignore",
   "trailingComma": "none",
-  "printWidth": 120
+  "printWidth": 120,
+  "overrides": [
+    {
+      "files": [
+        "**/*.json",
+        "**/*.yaml",
+        "**/*.yml",
+        ".prettierrc",
+        ".eslintrc",
+        "**/*.less"
+      ],
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": [
+        "**/*.rb"
+      ],
+      "options": {
+        "tabWidth": 2,
+        "printWidth": 120
+      }
+    }
+  ],
+  "rubyArrayLiteral": false,
+  "rubyModifier": false
 }
