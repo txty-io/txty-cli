@@ -59,7 +59,7 @@ async function request(url: string, method: string, headers: any, params: any, i
                     Logger.error(`Invalid response status received: ${response.status}`);
                 }
 
-                return response;
+                throw await response.json();
             }
         } catch (error) {
             throw error;
