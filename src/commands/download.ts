@@ -64,12 +64,12 @@ export default class Download extends Command {
                             response = await response.json();
                             if (response?.error) {
                                 ErrorUtils.getAndPrintErrors(response);
-                                throw new Error();
+                                throw new Error(response);
                             }
 
                             Logger.error("Failed to download translations.");
 
-                            throw new Error();
+                            throw new Error(response);
                         } else {
                             ctx.exportResponse = response;
                         }
