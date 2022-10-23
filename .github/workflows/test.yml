@@ -33,4 +33,5 @@ jobs:
         run: yarn test
 
       - name: Output docker app logs
+        if: always()
         run: docker logs texterify-cli-app-1
