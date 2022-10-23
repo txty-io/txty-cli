@@ -14,6 +14,13 @@ jobs:
       SECRET_KEY_BASE: 8dfc55709e6daaf5d7b2ce70e247374400f47db2e4b6867f67821290b440a0acbe931d5f4d9687f386e5aae3f0377da533450058e131b37dbc16b692c296c941
     steps:
       - uses: actions/checkout@v2
+
+      - name: Create docker volume texterify-database
+        run: docker volume create --name=texterify-database
+
+      - name: Create docker volume texterify-assets
+        run: docker volume create --name=texterify-assets
+
       - name: Run docker-compose
         run: docker-compose up -d
 
