@@ -21,10 +21,10 @@ jobs:
         run: docker volume create --name=texterify-assets
 
       - name: Run docker-compose
-        run: TEXTERIFY_TAG=${{ matrix.version }} docker-compose up -d
+        run: RAILS_ENV=test TEXTERIFY_TAG=${{ matrix.version }} docker-compose up -d
 
       - name: Create and seed test database
-        run: docker-compose exec -T app bundle exec rails db:create db:migrate db:seed RAILS_ENV=test
+        run: RAILS_ENV=test docker-compose exec -T app bundle exec rails db:create db:migrate db:seed
 
       - name: Install dependencies
         run: yarn
