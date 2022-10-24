@@ -35,3 +35,7 @@ jobs:
       - name: Output docker app logs
         if: always()
         run: docker logs texterify-cli_app_1
+
+      - name: Output docker db logs
+        if: always()
+        run: docker logs texterify-cli_db_1
