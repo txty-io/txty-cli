@@ -6,6 +6,7 @@ export async function loadCLISeeds() {
             method: "post",
             body: JSON.stringify({ name: "load_seed_cli", options: {} })
         });
+        console.log("Successfully loaded 'load_seed_cli'.");
     } catch (error) {
         console.error("Failed to load CLI test seeds.");
     }
@@ -17,6 +18,7 @@ export async function cleanDatabase() {
             method: "post",
             body: JSON.stringify({ name: "clean", options: {} })
         });
+        console.log("Successfully loaded 'clean'.");
     } catch (error) {
         console.error("Failed to clean database for test run.");
     }
