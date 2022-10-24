@@ -24,7 +24,7 @@ jobs:
         run: RAILS_ENV=test TEXTERIFY_TAG=${{ matrix.version }} docker-compose up -d
 
       - name: Create and seed test database
-        run: docker-compose exec -T app RAILS_ENV=test bundle exec rails db:create db:migrate db:seed
+        run: docker-compose exec -T app bundle exec rails db:create db:migrate db:seed RAILS_ENV=test
 
       - name: Install dependencies
         run: yarn
