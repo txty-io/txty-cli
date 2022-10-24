@@ -24,6 +24,7 @@ services:
       - DB_DEV_USERNAME=postgres
       - DB_TEST_HOST=db
       - DB_TEST_USERNAME=postgres
+      - RAILS_ENV=test
     depends_on:
       - db
     volumes:
