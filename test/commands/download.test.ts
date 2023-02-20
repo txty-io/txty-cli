@@ -1,10 +1,10 @@
 import { test } from "@oclif/test";
-import { cleanDatabase, loadCLISeeds } from "../TestUtils";
+import { executeCypressCommand } from "../TestUtils";
 
 describe("download", () => {
     before(async () => {
-        await cleanDatabase();
-        await loadCLISeeds();
+        await executeCypressCommand({ command: "clean" });
+        await executeCypressCommand({ command: "load_seed_cli" });
     });
 
     test.command(["download", "invalid"]).exit(2).it("fails with arg");

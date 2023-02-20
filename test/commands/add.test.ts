@@ -1,11 +1,11 @@
 import { test } from "@oclif/test";
 import * as uuid from "uuid";
-import { cleanDatabase, loadCLISeeds } from "../TestUtils";
+import { executeCypressCommand } from "../TestUtils";
 
 describe("add", () => {
     before(async () => {
-        await cleanDatabase();
-        await loadCLISeeds();
+        await executeCypressCommand({ command: "clean" });
+        await executeCypressCommand({ command: "load_seed_cli" });
     });
 
     test.command(["add"]).exit(2).it("fails without key name");
