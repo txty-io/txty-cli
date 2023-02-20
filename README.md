@@ -1,6 +1,6 @@
 # Texterify CLI
 
-[![Build Status](https://travis-ci.org/chrztoph/texterify-cli.svg?branch=master)](https://travis-ci.org/chrztoph/texterify-cli) [![License](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)](https://img.shields.io/github/license/chrztoph/texterify-cli.svg) [![Open Issues](https://img.shields.io/github/issues-raw/chrztoph/texterify-cli.svg)](https://img.shields.io/github/issues-raw/chrztoph/texterify-cli.svg)
+[![License](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)](https://img.shields.io/github/license/chrztoph/texterify-cli.svg) [![Open Issues](https://img.shields.io/github/issues-raw/chrztoph/texterify-cli.svg)](https://img.shields.io/github/issues-raw/chrztoph/texterify-cli.svg)
 
 **Official CLI to interact with Texterify.**
 
