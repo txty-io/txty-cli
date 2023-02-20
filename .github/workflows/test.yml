@@ -35,6 +35,9 @@ jobs:
       - name: docker ps
         run: docker ps
 
+      - name: instance debug infos
+        run: curl "http://localhost:3000/api/v1/instance/debug?secret=secret"
+
       - name: Run tests
         run: yarn test
 

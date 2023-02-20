@@ -25,6 +25,7 @@ services:
       - DB_TEST_HOST=db
       - DB_TEST_USERNAME=postgres
       - RAILS_ENV=test
+      - DEBUG_SECRET=secret
     depends_on:
       - db
     volumes:
