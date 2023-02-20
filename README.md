@@ -72,7 +72,7 @@ Example `texterify.json`
 | api_base_url            | The path where the API is located usually ending in `/api`.                                                                  | No       |
 | api_version             | The version of the API (for now only `v1` is available).                                                                     | No       |
 | project_id              | The project you want to manage. The project ID can be found on the project overview site or in the URL of the project sites. | No       |
-| export_configuration_id | The ID of the export configuration.                                                                                          | No       |
+| export_configuration_id | The ID of the export configuration. This can also be configured with `--export-config-id` on the command line.               | No       |
 | export_directory        | The directory where your translations will be exported to.                                                                   | No       |
 | project_path            | The path to your project. This can also be configured with `--project-path` on the command line.                             | Yes      |
 
