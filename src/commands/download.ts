@@ -21,6 +21,7 @@ export default class Download extends Command {
     static flags = {
         help: help_flag,
         "project-path": Flags.string(),
+        "export-config-id": Flags.string(),
         emojify: Flags.boolean(),
         "auth-email": auth_email_flag,
         "auth-secret": auth_secret_flag
@@ -48,7 +49,7 @@ export default class Download extends Command {
         const projectId = Settings.getProjectID();
         Validators.ensureProjectId(projectId);
 
-        const exportConfigId = Settings.getExportConfigID();
+        const exportConfigId = flags["export-config-id"] || Settings.getExportConfigID();
         Validators.ensureExportConfigId(exportConfigId);
 
         const tasks = new Listr([
