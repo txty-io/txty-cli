@@ -30,7 +30,7 @@ jobs:
         run: docker-compose exec -T app bundle install --with test
 
       - name: Restart containers for test gems to be considered
-        run: wait 2 && docker-compose restart
+        run: wait 2; docker-compose restart
 
       - name: Run docker ps
         run: docker ps
