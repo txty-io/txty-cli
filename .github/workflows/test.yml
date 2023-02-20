@@ -7,12 +7,12 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         version: ["latest"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Create docker volume texterify-database
         run: docker volume create --name=texterify-database
@@ -32,10 +32,13 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: docker ps
+      - name: Restart containers for test packages to be considered
+        run: docker-compose restart
+
+      - name: Run docker ps
         run: docker ps
 
-      - name: instance debug infos
+      - name: Get instance debug infos
         run: curl "http://localhost:3000/api/v1/instance/debug?secret=secret"
 
       - name: Run tests
