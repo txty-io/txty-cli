@@ -29,6 +29,9 @@ jobs:
       - name: Install test dependencies in app
         run: docker-compose exec -T app bundle install --with test
 
+      - name: Install dependencies
+        run: yarn
+
       - name: Restart containers for test gems to be considered
         run: docker-compose restart
 
