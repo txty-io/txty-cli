@@ -18,7 +18,7 @@
     "@types/node-fetch": "^2.5.7",
     "@types/query-string": "^6.3.0",
     "adm-zip": "^0.5.10",
-    "chalk": "^4.1.0",
+    "chalk": "4.1.2",
     "listr": "^0.14.3",
     "nconf": "^0.12.0",
     "node-fetch": "^2.6.0",
