@@ -27,7 +27,7 @@ export default class Download extends Command {
         "auth-secret": auth_secret_flag
     };
 
-    static args = [];
+    static args = {};
 
     static examples = ["$ texterify download"];
 

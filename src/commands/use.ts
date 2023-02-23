@@ -1,4 +1,4 @@
-import { Command, Flags } from "@oclif/core";
+import { Args, Command, Flags } from "@oclif/core";
 import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
@@ -17,7 +17,7 @@ export default class Use extends Command {
         help: Flags.help({ char: "h" })
     };
 
-    static args = [{ name: "global_config_name", required: true }];
+    static args = { global_config_name: Args.string({ required: true }) };
 
     static examples = ["$ texterify use serverA", "$ texterify use serverB"];
 

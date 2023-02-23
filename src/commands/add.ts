@@ -1,4 +1,4 @@
-import { Command, Flags } from "@oclif/core";
+import { Args, Command, Flags } from "@oclif/core";
 import { ErrorUtils } from "../api/ErrorUtils";
 import { KeysAPI } from "../api/KeysAPI";
 import { Logger } from "../Logger";
@@ -23,7 +23,10 @@ export default class Add extends Command {
         "auth-secret": auth_secret_flag
     };
 
-    static args = [{ name: "name", required: true }, { name: "content" }];
+    static args = {
+        name: Args.string({ required: true }),
+        content: Args.string({})
+    };
 
     static examples = [
         '$ texterify add "app.title" "MyApp" --description "The name of the app."',
