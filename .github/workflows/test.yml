@@ -41,6 +41,9 @@ jobs:
       - name: Run docker ps
         run: docker ps
 
+      - name: Run node -v
+        run: node -v
+
       - name: Get instance debug infos
         run: curl "http://localhost:3000/api/v1/instance/debug?secret=secret"
 
