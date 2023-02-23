@@ -21,6 +21,6 @@ export default class Open extends Command {
         const base = config.api_base_url.split("/api")[0];
         const route = "/dashboard/projects/";
         const url = `${base}${route}${config.project_id}`;
-        open(url);
+        await open(url);
     }
 }
