@@ -44,7 +44,7 @@ let projectSettingsFileName = "txty.json";
 let projectSettingsFile = path.join(process.cwd(), projectSettingsFileName);
 if (!fs.existsSync(projectSettingsFile)) {
     projectSettingsFileName = "texterify.json";
-    projectSettingsFile = path.join(homedir, projectSettingsFileName);
+    projectSettingsFile = path.join(process.cwd(), projectSettingsFileName);
 }
 
 const globalStore = new nconf.Provider();
