@@ -1,23 +1,21 @@
 import { Args, Command, Flags } from "@oclif/core";
 import { ErrorUtils } from "../api/ErrorUtils";
 import { KeysAPI } from "../api/KeysAPI";
-import { Logger } from "../Logger";
-import { Settings } from "../Settings";
-import { Validators } from "../Validators";
-import { showErrorFixSuggestions } from "../Suggestions";
-import { projectConfig } from "../Config";
-import * as nconf from "nconf";
-import * as path from "path";
 import { auth_email_flag } from "../flags/auth_email_flag";
 import { auth_secret_flag } from "../flags/auth_secret_flag";
 import { help_flag } from "../flags/help_flag";
+import { handleProjectPathFlag, project_path_flag } from "../flags/project_path_flag";
+import { Logger } from "../Logger";
+import { Settings } from "../Settings";
+import { showErrorFixSuggestions } from "../Suggestions";
+import { Validators } from "../Validators";
 
 export default class Add extends Command {
     static description = "add a new key with an optional default language translation content";
 
     static flags = {
         help: help_flag,
-        "project-path": Flags.string(),
+        "project-path": project_path_flag,
         description: Flags.string({ description: "Description of the key." }),
         "auth-email": auth_email_flag,
         "auth-secret": auth_secret_flag
@@ -29,8 +27,8 @@ export default class Add extends Command {
     };
 
     static examples = [
-        '$ texterify add "app.title" "MyApp" --description "The name of the app."',
-        '$ texterify add "app.description" "My app description"'
+        '$ txty add "app.title" "MyApp" --description "The name of the app."',
+        '$ txty add "app.description" "My app description"'
     ];
 
     async run() {
@@ -40,13 +38,7 @@ export default class Add extends Command {
             secret: flags["auth-secret"]
         });
 
-        if (flags["project-path"]) {
-            const configFilePath = path.join(flags["project-path"], "texterify.json");
-            const newProjectStore = new nconf.Provider();
-            newProjectStore.file({ file: configFilePath });
-            projectConfig.setStore(newProjectStore);
-            projectConfig.setKey("project_path", flags["project-path"]);
-        }
+        handleProjectPathFlag(flags["project-path"]);
 
         const projectId = Settings.getProjectID();
         Validators.ensureProjectId(projectId);

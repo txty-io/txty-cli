@@ -49,7 +49,7 @@ const Settings = {
         const authEmailProjectConfig = projectConfig.getKey("_auth_email");
         if (authEmailProjectConfig) {
             Logger.warn(
-                "WARNING: Save your auth email in the global config to keep it secure (learn more here: https://github.com/texterify/texterify-cli#authentication)."
+                "WARNING: Save your auth email in the global config to keep it secure (learn more here: https://github.com/txty-io/txty-cli#authentication)."
             );
             return authEmailProjectConfig;
         }
@@ -69,7 +69,7 @@ const Settings = {
         const authSecretProjectConfig = projectConfig.getKey("_auth_secret");
         if (authSecretProjectConfig) {
             Logger.warn(
-                "WARNING: Save your auth secret in the global config to keep it secure (learn more here: https://github.com/texterify/texterify-cli#authentication)."
+                "WARNING: Save your auth secret in the global config to keep it secure (learn more here: https://github.com/txty-io/txty-cli#authentication)."
             );
             return authSecretProjectConfig;
         }

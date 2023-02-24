@@ -1,26 +1,25 @@
+import { Command, Flags } from "@oclif/core";
 import AdmZip from "adm-zip";
 import fs from "fs";
 import Listr from "listr";
 import * as path from "path";
-import { ProjectsAPI } from "../api/ProjectsAPI";
-import { Logger } from "../Logger";
-import { Settings } from "../Settings";
-import { Validators } from "../Validators";
-import { showErrorFixSuggestions } from "../Suggestions";
-import { projectConfig } from "../Config";
-import * as nconf from "nconf";
 import { ErrorUtils } from "../api/ErrorUtils";
-import { Command, Flags } from "@oclif/core";
+import { ProjectsAPI } from "../api/ProjectsAPI";
 import { auth_email_flag } from "../flags/auth_email_flag";
 import { auth_secret_flag } from "../flags/auth_secret_flag";
 import { help_flag } from "../flags/help_flag";
+import { handleProjectPathFlag, project_path_flag } from "../flags/project_path_flag";
+import { Logger } from "../Logger";
+import { Settings } from "../Settings";
+import { showErrorFixSuggestions } from "../Suggestions";
+import { Validators } from "../Validators";
 
 export default class Download extends Command {
     static description = "download the translations";
 
     static flags = {
         help: help_flag,
-        "project-path": Flags.string(),
+        "project-path": project_path_flag,
         "export-config-id": Flags.string(),
         emojify: Flags.boolean(),
         "auth-email": auth_email_flag,
@@ -29,7 +28,7 @@ export default class Download extends Command {
 
     static args = {};
 
-    static examples = ["$ texterify download"];
+    static examples = ["$ txty download"];
 
     async run() {
         const { flags } = await this.parse(Download);
@@ -38,13 +37,7 @@ export default class Download extends Command {
             secret: flags["auth-secret"]
         });
 
-        if (flags["project-path"]) {
-            const configFilePath = path.join(flags["project-path"], "texterify.json");
-            const newProjectStore = new nconf.Provider();
-            newProjectStore.file({ file: configFilePath });
-            projectConfig.setStore(newProjectStore);
-            projectConfig.setKey("project_path", flags["project-path"]);
-        }
+        handleProjectPathFlag(flags["project-path"]);
 
         const projectId = Settings.getProjectID();
         Validators.ensureProjectId(projectId);
@@ -84,7 +77,7 @@ export default class Download extends Command {
             {
                 title: "Extracting translations...",
                 task: async (ctx, task) => {
-                    const zipName = path.join(Settings.getProjectPath(), `.texterify-${projectId}.zip`);
+                    const zipName = path.join(Settings.getProjectPath(), `.txty-${projectId}.zip`);
 
                     const dest = fs.createWriteStream(zipName);
                     ctx.exportResponse.body.pipe(dest);

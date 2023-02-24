@@ -3,21 +3,21 @@
 
 version: "3.7"
 volumes:
-  texterify-database:
+  txty-database:
     external:
-      name: texterify-database
-  texterify-assets:
+      name: txty-database
+  txty-assets:
     external:
-      name: texterify-assets
+      name: txty-assets
 services:
   db:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     image: postgres:12.2
     volumes:
-      - texterify-database:/var/lib/postgresql/data
+      - txty-database:/var/lib/postgresql/data
   app:
-    image: chrztoph/texterify:${TEXTERIFY_TAG}
+    image: chrztoph/texterify:${TXTY_TAG}
     environment:
       - SECRET_KEY_BASE=abd834a091ca2069a660b50dd50cffa0b9d5f6bd51395da186f07785c14f14bb52109b4d8bb3344cb8eb31ada9dd2a10a3422ef73317c0923ee32a732557faac
       - DB_DEV_HOST=db
@@ -29,12 +29,12 @@ services:
     depends_on:
       - db
     volumes:
-      - texterify-assets:/var/www/texterify/storage
+      - txty-assets:/var/www/txty/storage
     ports:
       - 3000:3000
 
   sidekiq:
-    image: chrztoph/texterify:${TEXTERIFY_TAG}
+    image: chrztoph/texterify:${TXTY_TAG}
     environment:
       - SECRET_KEY_BASE=abd834a091ca2069a660b50dd50cffa0b9d5f6bd51395da186f07785c14f14bb52109b4d8bb3344cb8eb31ada9dd2a10a3422ef73317c0923ee32a732557faac
       - DB_DEV_HOST=db

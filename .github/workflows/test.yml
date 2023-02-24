@@ -14,14 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Create docker volume texterify-database
-        run: docker volume create --name=texterify-database
+      - name: Create docker volume txty-database
+        run: docker volume create --name=txty-database
 
-      - name: Create docker volume texterify-assets
-        run: docker volume create --name=texterify-assets
+      - name: Create docker volume txty-assets
+        run: docker volume create --name=txty-assets
 
       - name: Run docker-compose
-        run: RAILS_ENV=test TEXTERIFY_TAG=${{ matrix.version }} docker-compose up -d
+        run: RAILS_ENV=test TXTY_TAG=${{ matrix.version }} docker-compose up -d
 
       - name: Create and seed test database
         run: docker-compose exec -T app bundle exec rails db:create db:migrate db:seed RAILS_ENV=test
@@ -52,8 +52,8 @@ jobs:
 
       - name: Output docker app logs
         if: always()
-        run: docker logs texterify-cli_app_1
+        run: docker logs txty-cli_app_1
 
       - name: Output docker db logs
         if: always()
-        run: docker logs texterify-cli_db_1
+        run: docker logs txty-cli_db_1

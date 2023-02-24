@@ -1,26 +1,32 @@
 import { Command, Flags } from "@oclif/core";
 import * as fs from "fs";
 import open from "open";
+import { handleProjectPathFlag, project_path_flag } from "../flags/project_path_flag";
+import { Settings } from "../Settings";
 import { Validators } from "../Validators";
 
 export default class Open extends Command {
-    static description = "open texterify website for the current project";
+    static description = "open txty website for the current project";
 
     static flags = {
-        help: Flags.help({ char: "h" })
+        help: Flags.help({ char: "h" }),
+        "project-path": project_path_flag
     };
-    static examples = ["$ texterify open"];
+    static examples = ["$ txty open"];
 
     async run() {
-        const CONFIG_NAME = "texterify.json";
-        Validators.ensureFileExists(CONFIG_NAME, "Project config not found:");
+        const { flags } = await this.parse(Open);
+        handleProjectPathFlag(flags["project-path"]);
 
-        const f = fs.readFileSync(CONFIG_NAME, "utf8");
-        const config = JSON.parse(f);
+        const projectId = Settings.getProjectID();
+        Validators.ensureProjectId(projectId);
 
-        const base = config.api_base_url.split("/api")[0];
+        const apiBaseUrl = Settings.getAPIBaseURL();
+        Validators.ensureAPIBaseUrl(apiBaseUrl);
+
+        const base = apiBaseUrl.split("/api")[0];
         const route = "/dashboard/projects/";
-        const url = `${base}${route}${config.project_id}`;
+        const url = `${base}${route}${projectId}`;
         await open(url);
     }
 }

@@ -1,6 +1,7 @@
 import * as nconf from "nconf";
 import * as os from "os";
 import * as path from "path";
+import * as fs from "fs";
 
 class Config {
     private store: nconf.Provider;
@@ -31,10 +32,20 @@ class Config {
 }
 
 const homedir = os.homedir();
-const globalSettingsFileName = ".texterify.json";
-const globalSettingsFile = path.join(homedir, globalSettingsFileName);
-const projectSettingsFileName = "texterify.json";
-const projectSettingsFile = path.join(process.cwd(), projectSettingsFileName);
+
+let globalSettingsFileName = ".txty.json";
+let globalSettingsFile = path.join(homedir, globalSettingsFileName);
+if (!fs.existsSync(globalSettingsFile)) {
+    globalSettingsFileName = ".texterify.json";
+    globalSettingsFile = path.join(homedir, globalSettingsFileName);
+}
+
+let projectSettingsFileName = "txty.json";
+let projectSettingsFile = path.join(process.cwd(), projectSettingsFileName);
+if (!fs.existsSync(projectSettingsFile)) {
+    projectSettingsFileName = "texterify.json";
+    projectSettingsFile = path.join(homedir, projectSettingsFileName);
+}
 
 const globalStore = new nconf.Provider();
 globalStore.file({ file: globalSettingsFile });

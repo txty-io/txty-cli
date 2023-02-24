@@ -1,12 +1,14 @@
 {
-  "name": "texterify",
-  "description": "A CLI for Texterify (https://github.com/chrztoph/texterify).",
+  "name": "@txty-io/txty-cli",
+  "description": "A CLI for Txty (https://github.com/txty-io/txty-cli).",
   "version": "0.1.1",
   "author": "Christoph Werner @chrztoph",
   "bin": {
-    "texterify": "./bin/run"
+    "txty": "bin/run"
   },
-  "bugs": "https://github.com/chrztoph/texterify-cli/issues",
+  "bugs": {
+    "url": "https://github.com/txty-io/txty-cli/issues"
+  },
   "dependencies": {
     "@oclif/core": "^2.3.0",
     "@oclif/plugin-help": "^5.2.5",
@@ -58,7 +60,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/chrztoph/texterify-cli",
+  "homepage": "https://github.com/txty-io/txty-cli",
   "keywords": [
     "oclif"
   ],
@@ -66,7 +68,7 @@
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "texterify",
+    "bin": "txty",
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-version",
@@ -83,7 +85,10 @@
       "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>."
     }
   },
-  "repository": "chrztoph/texterify-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/txty-io/txty-cli.git"
+  },
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "yarn lint",
@@ -94,7 +99,11 @@
     "lint": "eslint . --ext .ts --config .eslintrc",
     "release": "yarn publish",
     "start": "./bin/dev",
-    "start:watcher": "./node_modules/.bin/tsc -p . -w"
+    "start:watcher": "tsc -p . -w"
   },
-  "types": "lib/index.d.ts"
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  }
 }

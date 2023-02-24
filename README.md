@@ -1,34 +1,34 @@
-# Texterify CLI
+# Txty CLI
 
-[![License](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)](https://img.shields.io/github/license/chrztoph/texterify-cli.svg) [![Open Issues](https://img.shields.io/github/issues-raw/chrztoph/texterify-cli.svg)](https://img.shields.io/github/issues-raw/chrztoph/texterify-cli.svg)
+[![License](https://img.shields.io/github/license/txty-io/txty-cli.svg)](https://img.shields.io/github/license/txty-io/txty-cli.svg) [![Open Issues](https://img.shields.io/github/issues-raw/txty-io/txty-cli.svg)](https://img.shields.io/github/issues-raw/txty-io/txty-cli.svg)
 
-**Official CLI to interact with Texterify.**
+**Official CLI to interact with Txty.**
 
 This extension allows you to add keys and download your translations without leaving your terminal.
 
-For more information about Texterify visit https://github.com/texterify/texterify.
+For more information about Txty visit https://github.com/txty/txty.
 
 ## Installation
 
 ```sh
-yarn global add texterify
+yarn global add @txty-io/txty-cli
 ```
 
 or
 
 ```sh
-npm install -g texterify
+npm install -g @txty-io/txty-cli
 ```
 
 ## Authentication
 
-The `texterify` utility can be configured by placing a `.texterify.json` in your home folder.
+The `txty` utility can be configured by placing a `.txty.json` in your home folder.
 
 ### Authenticate via global config
 
-The authentication against the Texterify server is configured in the global `~/.texterify.json` configuration file. Make sure to always keep the global config file private.
+The authentication against the Txty server is configured in the global `~/.txty.json` configuration file. Make sure to always keep the global config file private.
 
-Example `~/.texterify.json`
+Example `~/.txty.json`
 
 ```json
 {
@@ -39,8 +39,8 @@ Example `~/.texterify.json`
 
 | Option      | Description                                                                                     | Optional |
 | ----------- | ----------------------------------------------------------------------------------------------- | -------- |
-| auth_email  | The email you use to log in on Texterify.                                                       | No       |
-| auth_secret | An access token you can generate at https://app.texterify.com/dashboard/settings/access-tokens. | No       |
+| auth_email  | The email you use to log in on Txty.                                                       | No       |
+| auth_secret | An access token you can generate at https://app.txty.io/dashboard/settings/access-tokens. | No       |
 
 ### Authenticate by passing auth credentials to commands
 
@@ -50,15 +50,15 @@ CLI passed auth credentials have precedence over those defined in the global con
 
 ## Project Config
 
-It is recommended that you put the project config `texterify.json` in the root directory of your project (otherwise you need to set `project_path`).
+It is recommended that you put the project config `txty.json` in the root directory of your project (otherwise you need to set `project_path`).
 
 No sensitive data should be stored in your project config so you can safely check this file in with your code and share it with others.
 
-Example `texterify.json`
+Example `txty.json`
 
 ```json
 {
-    "api_base_url": "https://app.texterify.com/api",
+    "api_base_url": "https://app.txty.io/api",
     "api_version": "v1",
     "project_id": "b53faf34-934a-491b-84aa-d880f3c2bce8",
     "export_configuration_id": "9bd1edfc-9d43-449d-9e51-7990630baf74",
@@ -78,16 +78,16 @@ Example `texterify.json`
 
 ## Usage
 
-If you have successfully configured your project you can try to do `texterify <command>` in the directory where you placed your project config. To get a list of all commands your current version supports try `texterify -h`.
+If you have successfully configured your project you can try to do `txty <command>` in the directory where you placed your project config. To get a list of all commands your current version supports try `txty -h`.
 
 ## Upgrade
 
 ```sh
-yarn global upgrade texterify@latest
+yarn global upgrade @txty-io/txty-cli@latest
 ```
 
 ```sh
-npm install -g texterify@latest
+npm install -g @txty-io/txty-cli@latest
 ```
 
 ## Contributing
@@ -97,7 +97,7 @@ Use the `yarn start` command to run the program.
 
 ### Example command for testing
 
-`yarn start add "my.key" "my description" --auth-email=test1@texterify.com --auth-secret=SECRET`
+`yarn start add "my.key" "my description" --auth-email=test1@txty.io --auth-secret=SECRET`
 
 ## Release a new version
 
@@ -110,6 +110,6 @@ yarn release
 
 ## License
 
-[![License](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)](https://img.shields.io/github/license/chrztoph/texterify-cli.svg)
+[![License](https://img.shields.io/github/license/txty-io/txty-cli.svg)](https://img.shields.io/github/license/txty-io/txty-cli.svg)
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
