@@ -7,22 +7,13 @@
   "printWidth": 120,
   "overrides": [
     {
-      "files": [
-        "**/*.json",
-        "**/*.yaml",
-        "**/*.yml",
-        ".prettierrc",
-        ".eslintrc",
-        "**/*.less"
-      ],
+      "files": ["**/*.json", "**/*.yaml", "**/*.yml", ".prettierrc", ".eslintrc", "**/*.less"],
       "options": {
         "tabWidth": 2
       }
     },
     {
-      "files": [
-        "**/*.rb"
-      ],
+      "files": ["**/*.rb"],
       "options": {
         "tabWidth": 2,
         "printWidth": 120

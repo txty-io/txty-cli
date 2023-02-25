@@ -1,7 +1,7 @@
 {
   "name": "@txty-io/txty-cli",
   "description": "A CLI for Txty (https://github.com/txty-io/txty-cli).",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "author": "Christoph Werner @chrztoph",
   "bin": {
     "txty": "bin/run"
@@ -26,9 +26,14 @@
   "devDependencies": {
     "@oclif/dev-cli": "^1",
     "@oclif/test": "^2.3.7",
+    "@types/adm-zip": "^0.5.0",
     "@types/chai": "^4.3.4",
+    "@types/listr": "^0.14.2",
     "@types/mocha": "^10.0.1",
+    "@types/nconf": "^0.10.0",
     "@types/node": "^18.14.1",
+    "@types/node-fetch": "^2.5.7",
+    "@types/query-string": "^6.3.0",
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.53.0",
@@ -43,15 +48,10 @@
     "nyc": "^15.1.0",
     "oclif": "^3.7.0",
     "prettier": "^2.8.4",
+    "shx": "^0.3.3",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5",
     "tslib": "^2.5.0",
-    "@types/adm-zip": "^0.5.0",
-    "@types/listr": "^0.14.2",
-    "@types/nconf": "^0.10.0",
-    "@types/node-fetch": "^2.5.7",
-    "@types/query-string": "^6.3.0",
-    "shx": "^0.3.3"
+    "typescript": "^4.9.5"
   },
   "engines": {
     "node": ">=12.0.0"
@@ -94,7 +94,7 @@
   "scripts": {
     "start": "./bin/dev",
     "start:watcher": "tsc -p . -w",
-    "build": "shx rm -rf dist && tsc -b",
+    "build": "shx rm -rf dist && shx rm tsconfig.tsbuildinfo && tsc -b",
     "lint": "eslint . --ext .ts --config .eslintrc",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "yarn lint",

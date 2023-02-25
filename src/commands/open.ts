@@ -6,7 +6,7 @@ import { Settings } from "../Settings";
 import { Validators } from "../Validators";
 
 export default class Open extends Command {
-    static description = "open txty website for the current project";
+    static description = "Open current project in browser.";
 
     static flags = {
         help: Flags.help({ char: "h" }),

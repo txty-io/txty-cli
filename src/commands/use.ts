@@ -9,9 +9,7 @@ import { Validators } from "../Validators";
 // multiple global configs named e.g. ~/.txty.json.serverA and ~/.txty.json.serverB
 // by calling "txty use serverA" or "txty use serverB".
 export default class Use extends Command {
-    static description =
-        "switch to a different txty server (e.g. if different projects use different servers), " +
-        "different global configs should be stored in ~/.txty.json.{global_config_name}";
+    static description = "Switch to a different global config (should be stored in ~/.txty.json.{global_config_name}).";
 
     static flags = {
         help: Flags.help({ char: "h" })

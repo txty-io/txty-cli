@@ -15,7 +15,7 @@ import { showErrorFixSuggestions } from "../Suggestions";
 import { Validators } from "../Validators";
 
 export default class Download extends Command {
-    static description = "download the translations";
+    static description = "Download translations.";
 
     static flags = {
         help: help_flag,

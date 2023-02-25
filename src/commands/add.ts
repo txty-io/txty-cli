@@ -11,7 +11,7 @@ import { showErrorFixSuggestions } from "../Suggestions";
 import { Validators } from "../Validators";
 
 export default class Add extends Command {
-    static description = "add a new key with an optional default language translation content";
+    static description = "Add a new key with an optional default language translation content.";
 
     static flags = {
         help: help_flag,
