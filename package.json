@@ -1,7 +1,7 @@
 {
   "name": "@txty-io/txty-cli",
   "description": "The official command-line tool to interact with Txty.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Christoph Werner @chrztoph",
   "bin": {
     "txty": "bin/run"
