@@ -1,6 +1,6 @@
 # Txty CLI
 
-[![License](https://img.shields.io/github/license/txty-io/txty-cli.svg)](https://img.shields.io/github/license/txty-io/txty-cli.svg) [![Open Issues](https://img.shields.io/github/issues-raw/txty-io/txty-cli.svg)](https://img.shields.io/github/issues-raw/txty-io/txty-cli.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/txty-io/txty-cli) [![License](https://img.shields.io/github/license/txty-io/txty-cli.svg)](https://img.shields.io/github/license/txty-io/txty-cli.svg)
 
 **The official command-line tool to interact with [Txty](https://texterify.com).**
 
