@@ -122,6 +122,6 @@ Found a security issue? Please **don't** create an issue on GitHub. Instead send
 
 <h2 id="license">📝 License</h2>
 
-![license](https://img.shields.io/github/license/txty-io/txty-cli?style=flat-square)
+[![license](https://img.shields.io/github/license/txty-io/txty-cli?style=flat-square)](https://github.com/txty-io/txty-cli/blob/master/LICENSE)
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
