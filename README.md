@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/txty-io/txty-cli.svg)](https://img.shields.io/github/license/txty-io/txty-cli.svg) [![Open Issues](https://img.shields.io/github/issues-raw/txty-io/txty-cli.svg)](https://img.shields.io/github/issues-raw/txty-io/txty-cli.svg)
 
-**The official command-line tool to interact with Txty.**
+**The official command-line tool to interact with [Txty](https://texterify.com).**
 
 <p align="center">
     <img src="https://github.com/txty-io/txty-cli/blob/c35ac6636be1115c58012232fd7444f9718cdb9b/preview.gif" />
@@ -10,21 +10,25 @@
 
 This extension allows you to add keys, download your translations and much more without leaving your terminal.
 
-For more information about Txty visit https://github.com/txty/txty.
+For more information about Txty visit https://github.com/txty-io/texterify.
 
-## Installation
-
-```sh
-yarn global add @txty-io/txty-cli
-```
-
-or
+<h2 id="getting-started">🚀 Getting started</h2>
 
 ```sh
 npm install -g @txty-io/txty-cli
+
+# or
+
+yarn global add @txty-io/txty-cli
 ```
 
-## Authentication
+and then
+
+```sh
+txty -h
+```
+
+<h2 id="authentication">🔑 Authentication</h2>
 
 The `txty` utility can be configured by placing a `.txty.json` in your home folder.
 
@@ -52,7 +56,7 @@ You can also pass the auth credentials to the CLI tool by adding `--auth-email=<
 
 CLI passed auth credentials have precedence over those defined in the global config.
 
-## Project Config
+<h2 id="project-config">⚙️ Project Config</h2>
 
 It is recommended that you put the project config `txty.json` in the root directory of your project (otherwise you need to set `project_path`).
 
@@ -80,11 +84,7 @@ Example `txty.json`
 | export_directory        | The directory where your translations will be exported to.                                                                   | No       |
 | project_path            | The path to your project. This can also be configured with `--project-path` on the command line.                             | Yes      |
 
-## Usage
-
-If you have successfully configured your project you can try to do `txty <command>` in the directory where you placed your project config. To get a list of all commands your current version supports try `txty -h`.
-
-## Upgrade
+<h2 id="upgrade">🛠️ Upgrade</h2>
 
 ```sh
 yarn global upgrade @txty-io/txty-cli@latest
@@ -94,24 +94,30 @@ yarn global upgrade @txty-io/txty-cli@latest
 npm install -g @txty-io/txty-cli@latest
 ```
 
-## Contributing
+<h2 id="contributing">🤝 Contributing</h2>
 
 Start the watcher with `yarn start:watcher` so your source code gets automatically compiled.
 Use the `yarn start` command to run the program.
 
 ### Example command for testing
 
-`yarn start add "my.key" "my description" --auth-email=test1@txty.io --auth-secret=SECRET`
+```
+yarn start add "my.key" "my description" --auth-email=test1@txty.io --auth-secret=SECRET
+```
 
-## Release a new version
+### Release a new version
 
-Run the following commands:
+Run the following command:
 
 ```
 yarn release
 ```
 
-## License
+<h2 id="security">🔒 Security</h2>
+
+Found a security issue? Please **don't** create an issue on GitHub. Instead send an email with your findings to [security@texterify.com](mailto:security@texterify.com) so a bugfix can be developed before the security flaw is publicly disclosed.
+
+<h2 id="license">📝 License</h2>
 
 [![License](https://img.shields.io/github/license/txty-io/txty-cli.svg)](https://img.shields.io/github/license/txty-io/txty-cli.svg)
 
