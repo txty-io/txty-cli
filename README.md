@@ -24,7 +24,7 @@ npm install -g @txty-io/txty-cli
 yarn global add @txty-io/txty-cli
 ```
 
-and then
+and then get a list of all commands via
 
 ```sh
 txty -h
