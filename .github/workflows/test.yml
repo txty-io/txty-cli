@@ -18,7 +18,7 @@ jobs:
         run: docker volume create --name=txty-database
 
       - name: Create docker volume txty-assets
-        run: docdker volume create --name=txty-assets
+        run: docker volume create --name=txty-assets
 
       - name: Run docker-compose
         run: RAILS_ENV=test TXTY_TAG=${{ matrix.version }} docker-compose up -d
