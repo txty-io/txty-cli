@@ -111,7 +111,7 @@ export default class Download extends Command {
 
         try {
             await tasks.run();
-            Logger.success("\nSuccessfully downloaded and extracted translations.");
+            Logger.success("\nSuccessfully downloaded translations.");
         } catch (error) {
             Logger.error("Failed to download and extract translations.");
             showErrorFixSuggestions(error);
