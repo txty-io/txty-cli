@@ -90,9 +90,9 @@ Example `txty.json`
 
 ```sh
 yarn global upgrade @txty-io/txty-cli@latest
-```
 
-```sh
+# or
+
 npm install -g @txty-io/txty-cli@latest
 ```
 
