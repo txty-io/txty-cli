@@ -2,9 +2,11 @@
 
 [![License](https://img.shields.io/github/license/txty-io/txty-cli.svg)](https://img.shields.io/github/license/txty-io/txty-cli.svg) [![Open Issues](https://img.shields.io/github/issues-raw/txty-io/txty-cli.svg)](https://img.shields.io/github/issues-raw/txty-io/txty-cli.svg)
 
-**Official CLI to interact with Txty.**
+**The official command-line tool to interact with Txty.**
 
-This extension allows you to add keys and download your translations without leaving your terminal.
+![](https://github.com/txty-io/txty-cli/preview.gif)
+
+This extension allows you to add keys, download your translations and much more without leaving your terminal.
 
 For more information about Txty visit https://github.com/txty/txty.
 
