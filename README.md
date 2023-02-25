@@ -59,7 +59,7 @@ You can also pass the auth credentials to the CLI tool by adding `--auth-email=<
 
 CLI passed auth credentials have precedence over those defined in the global config.
 
-<h2 id="project-config">⚙️ Project Config</h2>
+<h2 id="project-config">⚙️ Project config</h2>
 
 It is recommended that you put the project config `txty.json` in the root directory of your project (otherwise you need to set `project_path`).
 
