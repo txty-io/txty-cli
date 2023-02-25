@@ -1,7 +1,7 @@
 {
   "name": "@txty-io/txty-cli",
   "description": "The official command-line tool to interact with Txty.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Christoph Werner @chrztoph",
   "bin": {
     "txty": "bin/run"
@@ -101,7 +101,8 @@
     "prepack": "yarn build && oclif manifest && oclif readme",
     "test": "nyc mocha --forbid-only \"test/**/*.test.ts\"",
     "test:allow-only": "mocha \"test/**/*.test.ts\"",
-    "version": "oclif readme && git add README.md"
+    "version": "oclif readme && git add README.md",
+    "release": "yarn build && yarn publish"
   },
   "types": "dist/index.d.ts"
 }

@@ -104,8 +104,7 @@ Use the `yarn start` command to run the program.
 Run the following commands:
 
 ```
-yarn version
-yarn publish
+yarn release
 ```
 
 ## License
