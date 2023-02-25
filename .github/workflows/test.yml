@@ -18,7 +18,7 @@ jobs:
         run: docker volume create --name=txty-database
 
       - name: Create docker volume txty-assets
-        run: docker volume create --name=txty-assets
+        run: docdker volume create --name=txty-assets
 
       - name: Run docker-compose
         run: RAILS_ENV=test TXTY_TAG=${{ matrix.version }} docker-compose up -d
@@ -38,10 +38,10 @@ jobs:
       - name: Wait for containers to start
         run: sleep 10
 
-      - name: Run docker ps
+      - name: Run "docker ps"
         run: docker ps
 
-      - name: Run node -v
+      - name: Run "node -v"
         run: node -v
 
       - name: Get instance debug infos
@@ -57,3 +57,12 @@ jobs:
       - name: Output docker db logs
         if: always()
         run: docker logs txty-cli_db_1
+
+      - name: Send notification to Slack if job fails
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CI_ERRORS }}
+        if: failure()
