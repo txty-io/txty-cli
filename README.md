@@ -105,7 +105,7 @@ Run the following commands:
 
 ```
 yarn version
-yarn release
+yarn publish
 ```
 
 ## License
