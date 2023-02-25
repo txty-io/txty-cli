@@ -1,7 +1,8 @@
 # Txty CLI
 
-![license](https://img.shields.io/github/license/txty-io/txty-cli?style=flat-square)
-![release](https://img.shields.io/github/package-json/v/txty-io/txty-cli?style=flat-square)
+[![website](https://img.shields.io/badge/website-texterify.com-blue.svg?style=flat-square)](https://texterify.com)
+[![license](https://img.shields.io/github/license/txty-io/txty-cli?style=flat-square)](https://github.com/txty-io/txty-cli/blob/master/LICENSE)
+[![release](https://img.shields.io/github/package-json/v/txty-io/txty-cli?style=flat-square)](https://www.npmjs.com/package/@txty-io/txty-cli)
 
 
 **The official command-line tool to interact with [Txty](https://texterify.com).**
