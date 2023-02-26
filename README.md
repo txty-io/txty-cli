@@ -8,7 +8,7 @@
 **The official command-line tool to interact with [Txty](https://texterify.com).**
 
 <p align="center">
-    <img src="https://github.com/txty-io/txty-cli/blob/c35ac6636be1115c58012232fd7444f9718cdb9b/preview.gif" />
+    <img src="https://github.com/txty-io/txty-cli/blob/c35ac6636be1115c58012232fd7444f9718cdb9b/preview.png" />
 </p>
 
 This extension allows you to add keys, download your translations and much more without leaving your terminal.
