@@ -27,7 +27,7 @@ export interface ILanguage {
 
 export interface IGetLanguagesResponse {
     data: ILanguage[];
-    included: ILanguageCode[];
+    included?: ILanguageCode[];
     meta: { total: number };
 }
 
