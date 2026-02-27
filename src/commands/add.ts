@@ -56,14 +56,12 @@ export default class Add extends Command {
         const langTranslations: { [langCode: string]: string } = {};
         let defaultContent: string | undefined;
 
-        // If oclif included the declared "name" positional in argv, skip it.
-        // Also skip flag-like tokens (starting with "-") that may appear in strict: false mode.
-        const extraArgs = (argv as string[])[0] === args.name
-            ? (argv as string[]).slice(1)
-            : (argv as string[]);
+        // Filter out the declared key name arg and any flag-like tokens from argv
+        const extraArgs = (argv as string[]).filter(
+            (tok) => tok !== args.name && !tok.startsWith("-")
+        );
 
         for (const arg of extraArgs) {
-            if (arg.startsWith("-")) continue; // skip flag tokens
             const eqIndex = arg.indexOf("=");
             if (eqIndex > 0) {
                 const langCode = arg.substring(0, eqIndex);

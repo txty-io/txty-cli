@@ -16,6 +16,7 @@ function buildLangCodeToIdMap(response: IGetLanguagesResponse): Map<string, stri
                 (inc) => inc.id === langCodeRef.id && inc.type === "language_code"
             );
             if (langCodeObj) {
+                // Use lang.id (top-level JSON:API resource identifier) as the canonical UUID
                 map.set(langCodeObj.attributes.code, lang.id);
             }
         }
@@ -89,7 +90,7 @@ const KeysAPI = {
                     }
                 }
             } catch (e) {
-                Logger.warn("Failed to fetch project languages. Skipping language-specific translations.");
+                Logger.warn("Failed to create language-specific translations.");
             }
         }
 
