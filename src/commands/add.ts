@@ -56,7 +56,14 @@ export default class Add extends Command {
         const langTranslations: { [langCode: string]: string } = {};
         let defaultContent: string | undefined;
 
-        for (const arg of argv as string[]) {
+        // If oclif included the declared "name" positional in argv, skip it.
+        // Also skip flag-like tokens (starting with "-") that may appear in strict: false mode.
+        const extraArgs = (argv as string[])[0] === args.name
+            ? (argv as string[]).slice(1)
+            : (argv as string[]);
+
+        for (const arg of extraArgs) {
+            if (arg.startsWith("-")) continue; // skip flag tokens
             const eqIndex = arg.indexOf("=");
             if (eqIndex > 0) {
                 const langCode = arg.substring(0, eqIndex);
@@ -65,6 +72,13 @@ export default class Add extends Command {
             } else {
                 defaultContent = arg;
             }
+        }
+
+        if (defaultContent && Object.keys(langTranslations).length > 0) {
+            Logger.warn(
+                "Both a default translation and language-specific translations were provided. " +
+                "The default translation will target the project's default language."
+            );
         }
 
         let response: any;
