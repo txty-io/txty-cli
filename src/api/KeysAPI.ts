@@ -16,7 +16,7 @@ function buildLangCodeToIdMap(response: IGetLanguagesResponse): Map<string, stri
                 (inc) => inc.id === langCodeRef.id && inc.type === "language_code"
             );
             if (langCodeObj) {
-                map.set(langCodeObj.attributes.code, lang.attributes.id);
+                map.set(langCodeObj.attributes.code, lang.id);
             }
         }
     }
@@ -64,28 +64,32 @@ const KeysAPI = {
 
         // New behavior: explicit language-code translations
         if (options.langTranslations && Object.keys(options.langTranslations).length > 0) {
-            const languagesResponse: IGetLanguagesResponse = await LanguagesAPI.getLanguages(options.projectId);
-            const langCodeToId = buildLangCodeToIdMap(languagesResponse);
+            try {
+                const languagesResponse: IGetLanguagesResponse = await LanguagesAPI.getLanguages(options.projectId);
+                const langCodeToId = buildLangCodeToIdMap(languagesResponse);
 
-            for (const [langCode, content] of Object.entries(options.langTranslations)) {
-                const languageId = langCodeToId.get(langCode);
-                if (!languageId) {
-                    Logger.warn(`Language code "${langCode}" not found in project. Skipping.`);
-                    continue;
+                for (const [langCode, content] of Object.entries(options.langTranslations)) {
+                    const languageId = langCodeToId.get(langCode);
+                    if (!languageId) {
+                        Logger.warn(`Language code "${langCode}" not found in project. Skipping.`);
+                        continue;
+                    }
+
+                    const translationResponse: any = await TranslationsAPI.createTranslation({
+                        content,
+                        keyId,
+                        languageId,
+                        projectId: options.projectId
+                    });
+
+                    if (translationResponse.error) {
+                        Logger.warn(`Failed to create translation for language "${langCode}".`);
+                    } else {
+                        Logger.success(`Translation for "${langCode}" added.`);
+                    }
                 }
-
-                const translationResponse: any = await TranslationsAPI.createTranslation({
-                    content,
-                    keyId,
-                    languageId,
-                    projectId: options.projectId
-                });
-
-                if (translationResponse.error) {
-                    Logger.warn(`Failed to create translation for language "${langCode}".`);
-                } else {
-                    Logger.success(`Translation for "${langCode}" added.`);
-                }
+            } catch (e) {
+                Logger.warn("Failed to fetch project languages. Skipping language-specific translations.");
             }
         }
 
