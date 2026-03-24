@@ -12,9 +12,7 @@ function buildLangCodeToIdMap(response: IGetLanguagesResponse): Map<string, stri
     for (const lang of response.data || []) {
         const langCodeRef = lang.relationships?.language_code?.data;
         if (langCodeRef) {
-            const langCodeObj = included.find(
-                (inc) => inc.id === langCodeRef.id && inc.type === "language_code"
-            );
+            const langCodeObj = included.find((inc) => inc.id === langCodeRef.id && inc.type === "language_code");
             if (langCodeObj) {
                 // Use lang.id (top-level JSON:API resource identifier) as the canonical UUID
                 map.set(langCodeObj.attributes.code, lang.id);

@@ -92,20 +92,21 @@ npm install -g texterify@latest
 
 ## Contributing
 
-Start the watcher with `yarn start:watcher` so your source code gets automatically compiled.
-Use the `yarn start` command to run the program.
+Start the watcher with `npm run start:watcher` so your source code gets automatically compiled.
+Use the `npm run start` command to run the program.
 
 ### Example command for testing
 
-`yarn start add "my.key" "my description" --auth-email=test1@texterify.com --auth-secret=SECRET`
+`npm run start add "app.title" en="MyApp" de="MeineApp" -- --description "123"`
 
 ## Release a new version
 
 Run the following commands:
 
 ```
-yarn version
-yarn release
+npm version patch
+npm run version
+npm run release
 ```
 
 ## License

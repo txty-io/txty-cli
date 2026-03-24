@@ -82,13 +82,13 @@
     "repository": "chrztoph/texterify-cli",
     "scripts": {
         "postpack": "rm -f oclif.manifest.json",
-        "posttest": "yarn lint",
+        "posttest": "npm run lint",
         "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
         "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
         "test:allow-only": "mocha \"test/**/*.test.ts\"",
         "version": "oclif-dev readme && git add README.md",
         "lint": "eslint . --ext .ts --config .eslintrc",
-        "release": "yarn publish",
+        "release": "npm publish",
         "start": "./bin/dev",
         "start:watcher": "./node_modules/.bin/tsc -p . -w"
     },

@@ -31,7 +31,7 @@ export default class Add extends Command {
         '$ texterify add "app.title" "MyApp" --description "The name of the app."',
         '$ texterify add "app.description" "My app description"',
         '$ texterify add "app.title" en="MyApp" de="MeineApp"',
-        '$ texterify add "app.title" en="MyApp" de="MeineApp" --description "The app name"'
+        '$ texterify add "app.title" --description "The app name" en="MyApp" de="MeineApp"'
     ];
 
     async run() {
@@ -57,9 +57,7 @@ export default class Add extends Command {
         let defaultContent: string | undefined;
 
         // Filter out the declared key name arg and any flag-like tokens from argv
-        const extraArgs = (argv as string[]).filter(
-            (tok) => tok !== args.name && !tok.startsWith("-")
-        );
+        const extraArgs = (argv as string[]).filter((tok) => tok !== args.name && !tok.startsWith("-"));
 
         for (const arg of extraArgs) {
             const eqIndex = arg.indexOf("=");
@@ -75,7 +73,7 @@ export default class Add extends Command {
         if (defaultContent && Object.keys(langTranslations).length > 0) {
             Logger.warn(
                 "Both a default translation and language-specific translations were provided. " +
-                "The default translation will target the project's default language."
+                    "The default translation will target the project's default language."
             );
         }
 
