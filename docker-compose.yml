@@ -13,10 +13,11 @@ services:
   db:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
-    image: postgres:12.2
+    image: postgres:14.12
     volumes:
       - texterify-database:/var/lib/postgresql/data
   app:
+    platform: linux/amd64
     image: chrztoph/texterify:${TEXTERIFY_TAG}
     environment:
       - SECRET_KEY_BASE=abd834a091ca2069a660b50dd50cffa0b9d5f6bd51395da186f07785c14f14bb52109b4d8bb3344cb8eb31ada9dd2a10a3422ef73317c0923ee32a732557faac
@@ -34,6 +35,7 @@ services:
       - 3000:3000
 
   sidekiq:
+    platform: linux/amd64
     image: chrztoph/texterify:${TEXTERIFY_TAG}
     environment:
       - SECRET_KEY_BASE=abd834a091ca2069a660b50dd50cffa0b9d5f6bd51395da186f07785c14f14bb52109b4d8bb3344cb8eb31ada9dd2a10a3422ef73317c0923ee32a732557faac
